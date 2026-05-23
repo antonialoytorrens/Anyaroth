@@ -107,7 +107,7 @@
 
 					skel.change(function() {
 						
-						if (skel.isActive('medium'))
+						if (skel.IsEnabled('medium'))
 							$bannerAU.scrollwatchSuspend();
 						else
 							$bannerAU.scrollwatchResume();
@@ -136,7 +136,7 @@
 
 				skel.change(function() {
 					
-					if (skel.isActive('medium'))
+					if (skel.IsEnabled('medium'))
 						$banner.scrollwatchSuspend();
 					else
 						$banner.scrollwatchResume();

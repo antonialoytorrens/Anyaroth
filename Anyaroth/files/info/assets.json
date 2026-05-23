@@ -136,8 +136,8 @@
     [ "MenuButtons", "menu_buttons.png", 1, 3 ],
     [ "MenuLessButton", "menu_lessbutton.png", 1, 3 ],
     [ "MenuPlusButton", "menu_plusbutton.png", 1, 3 ],
-    [ "MenuReturnButton", "menu_backbutton.png", 1, 3 ],
-    [ "MenuFullScreenButton", "menu_fullScreenbutton.png", 1, 6 ],
+    [ "MenuReturnButton", "menu_backButton.png", 1, 3 ],
+    [ "MenuFullScreenButton", "menu_fullScreenButton.png", 1, 6 ],
 
     [ "DialogueBg", "dialogueBg.png", 3, 10 ],
     [ "NameBg", "nameBg.png", 3, 7 ],
