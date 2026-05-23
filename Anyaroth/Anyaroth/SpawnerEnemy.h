@@ -13,7 +13,7 @@ public:
 	virtual ~SpawnerEnemy() {}
 
 	void move();
-	virtual void dropCapsule(double deltaTime) {};
+	virtual void dropCapsule(double /*deltaTime*/) {};
 
 	int deadEnemies();
 	virtual void update(double deltaTime);

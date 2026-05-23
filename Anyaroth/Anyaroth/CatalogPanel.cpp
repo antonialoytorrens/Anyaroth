@@ -181,7 +181,7 @@ void CatalogPanel::reorderCatalog()
 		fil++;
 	}
 
-	for (int i = 0; i < visibleItems.size(); i++)
+	for (size_t i = 0; i < visibleItems.size(); i++)
 	{
 		ButtonUI* nL = (i > 0) ? visibleItems[i - 1] : _exitButton;
 		ButtonUI* nU = (i > 1) ? visibleItems[i - 2] : _exitButton;
@@ -205,7 +205,7 @@ void CatalogPanel::reorderCatalog()
 		_selectedButton->setSelected(true);
 }
 
-void CatalogPanel::selectItem(Game * game, ShopItem* item)
+void CatalogPanel::selectItem(Game * /*game*/, ShopItem* item)
 {
 	if (_selectedItem != nullptr)
 		_selectedItem->setChosen(false);
@@ -272,7 +272,7 @@ void CatalogPanel::showSelectedItemInfo()
 		_infoPanel->closeInfoPanel();
 }
 
-void CatalogPanel::buyItem(Game * game)
+void CatalogPanel::buyItem(Game * /*game*/)
 {
 	if (_player->spendMoney(_selectedItem->getItemInfo()._price))
 	{

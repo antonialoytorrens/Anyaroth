@@ -1,6 +1,6 @@
 #pragma once
-#include "SDL.h"
-#include "Box2D/Box2D.h"
+#include <SDL2/SDL.h>
+#include <box2d/box2d.h>
 #include "checkML.h"
 #include "InputComponent.h"
 #include "RenderComponent.h"
@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include <list>
+#include <typeinfo>
 
 #include "FileNotFoundError.h"
 #include "FileFormatError.h"
@@ -100,10 +101,10 @@ public:
 	inline b2World* getWorld() const { return _world; }
 	inline void setWorld(b2World* world) { _world = world; }
 
-	virtual void beginCollision(GameObject* other, b2Contact* contact) {}
-	virtual void endCollision(GameObject* other, b2Contact* contact) {}
-	virtual void preCollision(GameObject* other, b2Contact* contact) {}
-	virtual void postCollision(GameObject* other, b2Contact* contact) {}
+	virtual void beginCollision(GameObject* /*other*/, b2Contact* /*contact*/) {}
+	virtual void endCollision(GameObject* /*other*/, b2Contact* /*contact*/) {}
+	virtual void preCollision(GameObject* /*other*/, b2Contact* /*contact*/) {}
+	virtual void postCollision(GameObject* /*other*/, b2Contact* /*contact*/) {}
 
 	inline void addChild(GameObject* obj) { obj->_parent = this; _children.push_back(obj); }
 	inline void addChildFront(GameObject* obj) { obj->_parent = this; _children.push_front(obj); }
@@ -116,18 +117,18 @@ public:
 	inline string getTag() const { return _tag; }
 	inline void setTag(string  const &tag) { _tag = tag; }
 
-	inline bool isActive() const { return _active; }
+	inline bool IsEnabled() const { return _active; }
 	inline bool isPlayer() const { return _isPlayer; }
-	inline void setActive(bool active) { _active = active; }
-	virtual inline void setStopped(bool value) {}
-	virtual inline void setStunned(bool value) {}
-	virtual inline void setInputFreezed(bool b) {}
+	inline void SetEnabled(bool active) { _active = active; }
+	virtual inline void setStopped(bool /*value*/) {}
+	virtual inline void setStunned(bool /*value*/) {}
+	virtual inline void setInputFreezed(bool /*b*/) {}
 
 	inline bool isDead() const { return _dead; }
 	inline void setDead(bool dead) { _dead = dead; }
 
 	virtual int getDamage() const { return 0; }
-	virtual void subLife(int damage) {}
+	virtual void subLife(int /*damage*/) {}
 
 	inline Camera* getCamera() const;
 

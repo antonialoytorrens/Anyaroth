@@ -16,7 +16,7 @@ public:
 	Melee(Game* g, Vector2D offset, Uint16 collidesWith, double damage, double w, double h, MeleeType id);
 	virtual ~Melee() {}
 
-	virtual void update(double deltaTime) {}
+	virtual void update(double /*deltaTime*/) {}
 	virtual void meleeAttack(double x, double y, int dir);
 
 	inline int getDamage() const { return _damage; }
@@ -29,6 +29,6 @@ public:
 
 	inline const MeleeType& getMeleeID() const { return _id; }
 
-	inline bool isActive() const { return (_body != nullptr && _body->getBody() != nullptr &&  _body->getBody()->IsActive()); }
-	void setActive(bool act) { if (_body != nullptr && _body->getBody() != nullptr) _body->getBody()->SetActive(act); }
+	inline bool IsEnabled() const { return (_body != nullptr && _body->getBody() != nullptr &&  _body->getBody()->IsEnabled()); }
+	void SetEnabled(bool act) { if (_body != nullptr && _body->getBody() != nullptr) _body->getBody()->SetEnabled(act); }
 };

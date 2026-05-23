@@ -40,7 +40,7 @@ public:
 
 	inline Texture* getItemImage() const { return getImage(); }
 	inline ItemInfo& getItemInfo() { return _info; }
-	inline void getItem(Game* game) {  }
+	inline void getItem(Game* /*game*/) {  }
 
 	virtual void setPosition(int x, int y);
 	virtual void setSize(int w, int h);

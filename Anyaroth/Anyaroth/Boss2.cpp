@@ -3,7 +3,7 @@
 #include "ImprovedShotgun.h"
 #include "CutScene.h"
 
-Boss2::Boss2(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Boss(g, player, pos, pool, g->getTexture("AzuraBoss")), Enemy(g, player, pos, g->getTexture("AzuraBoss"), "boss2Die", "boss2Hit", "meleeEnemyHit")
+Boss2::Boss2(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Enemy(g, player, pos, g->getTexture("AzuraBoss"), "boss2Die", "boss2Hit", "meleeEnemyHit"), Boss(g, player, pos, pool, g->getTexture("AzuraBoss"))
 {
 	_life = 450;
 	_life1 = _life2 = _life3 = _life;
@@ -147,7 +147,7 @@ void Boss2::checkJump(double deltaTime)
 		endJump();
 }
 
-void Boss2::movement(double deltaTime)
+void Boss2::movement(double /*deltaTime*/)
 {
 	if (_actualFase != BetweenFase)
 	{
@@ -164,7 +164,7 @@ void Boss2::movement(double deltaTime)
 		else
 			_anim->flip();
 
-		if (_actualState != Jumping && (range <= -_stopRange || range >= _stopRange) && _actualState == Moving || (_actualState == Meleeing && _realMelee))
+		if ((_actualState != Jumping && (range <= -_stopRange || range >= _stopRange) && _actualState == Moving) || (_actualState == Meleeing && _realMelee))
 		{
 			_body->getBody()->SetLinearVelocity(b2Vec2(_velocity.getX() * _dir / M_TO_PIXEL, _body->getBody()->GetLinearVelocity().y));
 			
@@ -242,7 +242,7 @@ void Boss2::meleeAttack()
 	int dir = (_bodyPos.getX() >= _playerPos.getX()) ? -1 : 1;
 	_melee->meleeAttack(_bodyPos.getX(), _bodyPos.getY(), dir);
 
-	_melee->setActive(false);
+	_melee->SetEnabled(false);
 
 	if (_life1.getLife() > 0)
 		_anim->playAnim(AnimatedSpriteComponent::AzuraSpinStart1);
@@ -265,7 +265,7 @@ void Boss2::checkMelee(double deltaTime)
 		{
 			if (anim == AnimatedSpriteComponent::AzuraSpinStart1 || anim == AnimatedSpriteComponent::AzuraSpinStart2 || anim == AnimatedSpriteComponent::AzuraSpinStart3)
 			{
-				_melee->setActive(true);
+				_melee->SetEnabled(true);
 				_realMelee = true;
 				if (_life1.getLife() > 0)
 					_anim->playAnim(AnimatedSpriteComponent::AzuraSpinLoop1);
@@ -438,7 +438,7 @@ void Boss2::fase3(double deltaTime)
 		checkJump(deltaTime);
 }
 
-void Boss2::beetwenFases(double deltaTime)
+void Boss2::beetwenFases(double /*deltaTime*/)
 {
 	if (_anim->animationFinished() || _life3.getLife() == 0)
 	{
@@ -476,7 +476,7 @@ void Boss2::beetwenFases(double deltaTime)
 	}
 	else
 	{
-		if (_melee != nullptr && _melee->isActive())
+		if (_melee != nullptr && _melee->IsEnabled())
 		{
 			_melee->endMelee();
 			_velocity = { _originalVelocity.getX(), _originalVelocity.getY() };

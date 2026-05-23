@@ -45,16 +45,16 @@ public:
 	virtual void manageLife(Life& l, int damage);
 	void drop() {}
 
-	virtual void movement(double deltaTime) {}
+	virtual void movement(double /*deltaTime*/) {}
 
-	virtual void fase1(double deltaTime) {}
-	virtual void fase2(double deltaTime) {}
-	virtual void fase3(double deltaTime) {}
+	virtual void fase1(double /*deltaTime*/) {}
+	virtual void fase2(double /*deltaTime*/) {}
+	virtual void fase3(double /*deltaTime*/) {}
 
-	virtual void beetwenFases(double deltaTime) {}
-	bool inline const isbeetweenFases() { return _actualFase == BetweenFase; }
+	virtual void beetwenFases(double /*deltaTime*/) {}
+	bool inline isbeetweenFases() { return _actualFase == BetweenFase; }
 
 	virtual void changeFase(int fase);
 	virtual void addSensors();
-	int inline const getLastFase() { return _lastFase; }
+	int inline getLastFase() { return _lastFase; }
 };

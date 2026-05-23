@@ -21,8 +21,8 @@ public:
 	~TextUI() { if (_texture != nullptr) delete _texture; }
 
 	virtual void render() const;
-	virtual void update(double deltaTime) {}
-	virtual bool handleEvent(const SDL_Event& event) { return false; }
+	virtual void update(double /*deltaTime*/) {}
+	virtual bool handleEvent(const SDL_Event& /*event*/) { return false; }
 
 	inline string getText() const { return _text; }
 	void setText(string text);

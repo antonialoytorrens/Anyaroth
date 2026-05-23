@@ -1,7 +1,7 @@
 #include "Laser.h"
 #include "Game.h"
 
-Laser::Laser(Game* g, Vector2D pos, Texture* texture, Player* player, double damage) : GameObject(g, "Laser"), _damage(damage), _pos(pos), _player(player)
+Laser::Laser(Game* g, Vector2D pos, Texture* texture, Player* player, double damage) : GameObject(g, "Laser"), _pos(pos), _player(player), _damage(damage)
 {
 	addComponent<Texture>(texture);
 
@@ -13,12 +13,12 @@ Laser::Laser(Game* g, Vector2D pos, Texture* texture, Player* player, double dam
 	_anim->addAnim(AnimatedSpriteComponent::LaserShooting, 1, true);
 	_anim->addAnim(AnimatedSpriteComponent::LaserWarning, 1, true);
 
-	setActive(false);
+	SetEnabled(false);
 }
 
 void Laser::update(double deltaTime)
 {
-	if (isActive())
+	if (IsEnabled())
 	{
 		if (colliding)
 		{
@@ -51,7 +51,7 @@ void Laser::Shoot()
 	}
 	else
 	{
-		_body->getBody()->SetActive(true);
+		_body->getBody()->SetEnabled(true);
 		_body->getBody()->SetTransform(_pos, _angle * M_PI / 180);
 	}
 }
@@ -59,7 +59,7 @@ void Laser::Shoot()
 void Laser::PreShoot(double angle)
 {
 	_anim->playAnim(AnimatedSpriteComponent::LaserWarning); 
-	setActive(true); 
+	SetEnabled(true); 
 
 	_transform->setRotation(angle);
 	_angle = angle;
@@ -67,11 +67,11 @@ void Laser::PreShoot(double angle)
 
 void Laser::Stop()
 {
-	setActive(false);
-	_body->getBody()->SetActive(false);
+	SetEnabled(false);
+	_body->getBody()->SetEnabled(false);
 }
 
-void Laser::beginCollision(GameObject* other, b2Contact* contact)
+void Laser::beginCollision(GameObject* other, b2Contact* /*contact*/)
 {
 	if (other->getTag() == "Player")
 	{
@@ -79,7 +79,7 @@ void Laser::beginCollision(GameObject* other, b2Contact* contact)
 	}
 }
 
-void Laser::endCollision(GameObject* other, b2Contact* contact)
+void Laser::endCollision(GameObject* other, b2Contact* /*contact*/)
 {
 	if (other->getTag() == "Player")
 	{

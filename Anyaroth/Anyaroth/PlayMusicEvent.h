@@ -12,6 +12,6 @@ public:
 	PlayMusicEvent(Game* game, string music) : _game(game), _music(music) {}
 	virtual ~PlayMusicEvent() {};
 
-	virtual void update(double deltaTime) {}
+	virtual void update(double /*deltaTime*/) {}
 	virtual void play();
 };

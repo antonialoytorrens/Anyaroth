@@ -7,9 +7,9 @@ PoleAxe::PoleAxe(Game * game) : Melee(game, { 0, 0 }, ENEMIES, 15, 60, 30, PoleA
 
 PoleAxe::~PoleAxe() {}
 
-void PoleAxe::update(double deltaTime)
+void PoleAxe::update(double /*deltaTime*/)
 {
-	if (isActive())
+	if (IsEnabled())
 	{
 		_pos = { _body->getBody()->GetPosition().x * M_TO_PIXEL, _body->getBody()->GetPosition().y * M_TO_PIXEL };
 		_nextPos = _pos + _velocity * (double)_dir;

@@ -3,7 +3,7 @@
 #include "Game.h"
 
 
-BackGround::BackGround(Texture * texture, Camera * camera) : _texture(texture)
+BackGround::BackGround(Texture * texture, Camera * /*camera*/) : _texture(texture)
 {
 	_mainRect = { 0, 0, GAME_RESOLUTION_X, GAME_RESOLUTION_Y };
 }

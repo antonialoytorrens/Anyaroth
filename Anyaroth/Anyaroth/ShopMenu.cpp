@@ -205,7 +205,7 @@ void ShopMenu::openShop()
 	_zone = GameManager::getInstance()->getCurrentLevel();
 	_visible = true;
 	_closed = false;
-	_player->setActive(false);
+	_player->SetEnabled(false);
 
 	_game->getSoundManager()->playSFX("doorOpen");
 	_game->getSoundManager()->playMusic("shop", true);
@@ -223,7 +223,7 @@ void ShopMenu::closeShop()
 	_closed = true;
 	_dialoguePanel->endDialogue();
 	_game->getSoundManager()->stopMusic();
-	_player->setActive(true);
+	_player->SetEnabled(true);
 	SDL_ShowCursor(false);
 
 	if (_game->usingJoystick())
@@ -239,7 +239,7 @@ void ShopMenu::setDialoguePanel(DialoguePanel* dialoguePanel)
 	addChild(_dialoguePanel);
 }
 
-void ShopMenu::ableMainMenu(Game * game)
+void ShopMenu::ableMainMenu(Game * /*game*/)
 {
 	_shopButton->setVisible(true);
 	_shopText->setVisible(true);
@@ -266,7 +266,7 @@ void ShopMenu::ableMainMenu(Game * game)
 	_mainMenuAbled = true;
 }
 
-void ShopMenu::disableMainMenu(Game * game)
+void ShopMenu::disableMainMenu(Game * /*game*/)
 {
 	_shopButton->setVisible(false);
 	_shopText->setVisible(false);
@@ -325,12 +325,12 @@ void ShopMenu::closeDepotPanel(Game * game)
 	ableMainMenu(game);
 }
 
-void ShopMenu::exit(Game* game)
+void ShopMenu::exit(Game* /*game*/)
 {
 	_exitButton->setVisible(false);
 	_game->getCurrentState()->getMainCamera()->fadeOut(500);
 
-	_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* game)
+	_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* /*game*/)
 	{
 		closeShop();
 		setVisible(false); 

@@ -11,9 +11,9 @@ void Sword::meleeAttack(double x, double y, int dir)
 	_angle = (_dir == 1) ? _iniAngle - 40 :  _iniAngle + 40;
 }
 
-void Sword::update(double deltaTime)
+void Sword::update(double /*deltaTime*/)
 {
-	if (isActive())
+	if (IsEnabled())
 	{
 		_angle += _speed * _dir;
 		double x, y;

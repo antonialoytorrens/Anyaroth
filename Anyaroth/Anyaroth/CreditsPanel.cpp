@@ -119,13 +119,13 @@ void CreditsPanel::nextState()
 {
 	_inputEnabled = false;
 	_game->getCurrentState()->getMainCamera()->fadeOut(1000);
-	_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* game)
+	_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* /*game*/)
 	{
 		_state = (State)(_state + 1);
 		_game->getCurrentState()->getMainCamera()->fadeIn(1000);
 		if (_state != ChangeToMenu)
 		{
-			_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* game) 
+			_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* /*game*/) 
 			{
 				_inputEnabled = true;		
 			});
@@ -154,6 +154,9 @@ void CreditsPanel::checkState()
 		break;
 	case ChangeToMenu:
 		goToMenu();
+		break;
+	case First:
+	default:
 		break;
 	}
 }

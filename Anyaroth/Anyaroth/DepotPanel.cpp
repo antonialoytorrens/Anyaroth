@@ -309,7 +309,7 @@ void DepotPanel::reorderDepot()
 		fil++;
 	}
 
-	for (int i=0; i < visibleWeapons.size(); i++)
+	for (size_t i=0; i < visibleWeapons.size(); i++)
 	{
 		ButtonUI* nL = (i > 0) ? visibleWeapons[i - 1] : _exitButton;
 		ButtonUI* nU = (i > 3) ? visibleWeapons[i - 4] : ((visibleMelee.begin() != visibleMelee.end()) ? *prev(visibleMelee.end()) : nullptr);
@@ -317,7 +317,7 @@ void DepotPanel::reorderDepot()
 		ButtonUI* nD = (i + 4 < visibleWeapons.size()) ? visibleWeapons[i + 4] :((visibleMelee.begin() != visibleMelee.end()) ? *visibleMelee.begin() : nullptr);
 		visibleWeapons[i]->setNextButtons({ nL, nU, nR, nD });
 	}
-	for (int i = 0; i < visibleMelee.size(); i++)
+	for (size_t i = 0; i < visibleMelee.size(); i++)
 	{
 		ButtonUI* nL = (i > 0) ? visibleMelee[i - 1] : _exitButton;
 		ButtonUI* nU = (i > 3) ? visibleMelee[i - 4] : ((visibleWeapons.begin() != visibleWeapons.end()) ? *prev(visibleWeapons.end()) : nullptr);
@@ -355,7 +355,7 @@ void DepotPanel::reorderDepot()
 		_selectedButton->setSelected(true);
 }
 
-void DepotPanel::changeEquipedGuns(Game* game)
+void DepotPanel::changeEquipedGuns(Game* /*game*/)
 {
 	if (_secondWeaponFrame->getItemInfo()._type != None)
 	{
@@ -372,7 +372,7 @@ void DepotPanel::changeEquipedGuns(Game* game)
 	}
 }
 
-void DepotPanel::selectItem(Game * game, ShopItem* item)
+void DepotPanel::selectItem(Game * /*game*/, ShopItem* item)
 {
 	if (_selectedItem != nullptr)
 	{
@@ -405,7 +405,7 @@ void DepotPanel::selectItem(Game * game, ShopItem* item)
 	}
 }
 
-void DepotPanel::setDistanceWeapon(Game* game, ShopItem* item)
+void DepotPanel::setDistanceWeapon(Game* /*game*/, ShopItem* item)
 {
 	if (_selectedItem != nullptr && !_selectedItem->getItemInfo()._isMelee) //COMPROBAR QUE NO ES MELEE
 	{
@@ -417,7 +417,7 @@ void DepotPanel::setDistanceWeapon(Game* game, ShopItem* item)
 	}
 }
 
-void DepotPanel::setMeleeWeapon(Game* game, ShopItem* item)
+void DepotPanel::setMeleeWeapon(Game* /*game*/, ShopItem* item)
 {
 	if (_selectedItem != nullptr && _selectedItem->getItemInfo()._isMelee) //COMPROBAR QUE NO ES A DISTANCIA
 	{

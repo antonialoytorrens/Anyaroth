@@ -56,7 +56,7 @@ void FlyingEnemy::update(double deltaTime)
 		destroy();
 }
 
-void FlyingEnemy::beginCollision(GameObject * other, b2Contact * contact)
+void FlyingEnemy::beginCollision(GameObject * other, b2Contact * /*contact*/)
 {
 	if (other->getTag() == "Player")
 	{

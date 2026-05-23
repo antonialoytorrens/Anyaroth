@@ -21,7 +21,7 @@ BossSensor::BossSensor(Game * g, Boss3 * owner, Vector2D size, Vector2D offset) 
 	f->setInitialOffset(_offset);
 }
 
-void BossSensor::beginCollision(GameObject * other, b2Contact * contact)
+void BossSensor::beginCollision(GameObject * other, b2Contact * /*contact*/)
 {
 	if (other->getTag() == "Bullet")
 		_owner->setBulletApproaching(true);

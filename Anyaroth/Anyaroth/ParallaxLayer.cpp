@@ -13,7 +13,7 @@ void ParallaxLayer::render() const
 	}
 }
 
-void ParallaxLayer::update(double deltaTime)
+void ParallaxLayer::update(double /*deltaTime*/)
 {
 	_leftDir ? _auxX -= _speed : _auxX += _speed;
 	_mainRect.x = _auxX;

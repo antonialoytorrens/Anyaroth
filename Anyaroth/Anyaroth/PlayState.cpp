@@ -164,7 +164,7 @@ void PlayState::update(double deltaTime)
 		{
 			_player->setInputFreezed(true);
 			getMainCamera()->fadeOut(1000);
-			getMainCamera()->onFadeComplete([this, gameManager](Game* game)
+			getMainCamera()->onFadeComplete([this, gameManager](Game* /*game*/)
 			{
 				gameManager->changeLevel(-1);
 				_levelManager.changeLevel(gameManager->getCurrentLevel());
@@ -180,7 +180,7 @@ void PlayState::update(double deltaTime)
 
 			_player->setInputFreezed(true);
 			getMainCamera()->fadeOut(1000);
-			getMainCamera()->onFadeComplete([this, gameManager](Game* game)
+			getMainCamera()->onFadeComplete([this, gameManager](Game* /*game*/)
 			{
 				gameManager->changeLevel(1);
 

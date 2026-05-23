@@ -4,7 +4,7 @@
 #include "FloatingHead.h"
 #include "CutScene.h"
 
-Boss3::Boss3(Game * g, Player * player, Vector2D pos, BulletPool * pool) : Boss(g, player, pos, pool, g->getTexture("Angra")), Enemy(g, player, pos, g->getTexture("Angra"), "die2", "boss1Hit", "meleeEnemyHit")
+Boss3::Boss3(Game * g, Player * player, Vector2D pos, BulletPool * pool) : Enemy(g, player, pos, g->getTexture("Angra"), "die2", "boss1Hit", "meleeEnemyHit"), Boss(g, player, pos, pool, g->getTexture("Angra"))
 {
 	_life = 600;
 	_life1 = _life;
@@ -70,13 +70,13 @@ Boss3::Boss3(Game * g, Player * player, Vector2D pos, BulletPool * pool) : Boss(
 
 	_invulnerable = true;
 
-	_body->getBody()->SetActive(false);
+	_body->getBody()->SetEnabled(false);
 	_armVision = false;
 
 	addSensors();
 }
 
-void Boss3::handleAnimations(double time)
+void Boss3::handleAnimations(double /*time*/)
 {
 	if (_actualFase == Fase2)
 	{
@@ -176,7 +176,7 @@ void Boss3::update(double deltaTime)
 	}
 }
 
-void Boss3::movement(double deltaTime)
+void Boss3::movement(double /*deltaTime*/)
 {
 	if (_actualState == Moving)
 	{
@@ -203,7 +203,7 @@ void Boss3::movement(double deltaTime)
 				_arm->setOffSet(Vector2D(90, 105));
 		}
 
-		if (range <= -_stopRange || range >= _stopRange && _actualState != Shooting)
+		if (range <= -_stopRange || (range >= _stopRange && _actualState != Shooting))
 		{
 			_body->getBody()->SetLinearVelocity(b2Vec2(_velocity * _dir.getX() / M_TO_PIXEL, _body->getBody()->GetLinearVelocity().y));
 			_anim->playAnim(AnimatedSpriteComponent::AngraWalk);
@@ -223,7 +223,7 @@ void Boss3::fase1(double deltaTime)
 
 	if (_initSpawn)
 	{
-		for (int i = 0; i < _spawners.size(); i++)
+		for (size_t i = 0; i < _spawners.size(); i++)
 			_spawners.at(i)->spawnEnemy();
 
 		_initSpawn = false;
@@ -232,21 +232,21 @@ void Boss3::fase1(double deltaTime)
 	{
 		if (!_headTurn)
 		{
-			for (int j = 0; j < _spawners.size(); j++)
+			for (size_t j = 0; j < _spawners.size(); j++)
 				aliveEnemies += _spawners.at(j)->aliveEnemies();
 
 			if (aliveEnemies == 0)
 			{
 				_headTurn = true;
 
-				for (int x = 0; x < _heads.size(); x++)
+				for (size_t x = 0; x < _heads.size(); x++)
 					if(!_heads[x]->isDead())
 						_heads.at(x)->turnInvincibilityOff();
 			}
 		}
 		else
 		{
-			for (int x = 0; x < _heads.size(); x++)
+			for (size_t x = 0; x < _heads.size(); x++)
 			{
 				ok = (_heads.at(x)->isInvincible() && ok);
 				HeadsDead = (_heads.at(x)->isDead() && HeadsDead);
@@ -402,7 +402,7 @@ void Boss3::beetwenFases(double deltaTime)
 		{
 			changeFase(Fase2);
 			_boss3Panel->setVisible(true);
-			_body->getBody()->SetActive(true);
+			_body->getBody()->SetEnabled(true);
 			_armVision = false;
 
 			_actualState = PortalAttack;
@@ -433,8 +433,7 @@ void Boss3::beetwenFases(double deltaTime)
 			double pos = _body->getBody()->GetPosition().x* M_TO_PIXEL;
 			_dir = Vector2D((pos >= _playerPos.getX()) ? -1 : 1, _dir.getY());
 
-			_corpse->setActive(true);
-			bool flip;
+			_corpse->SetEnabled(true);
 			if (_dir.getX() == 1)
 				_corpse->getComponent<SpriteComponent>()->unFlip();
 			else
@@ -478,8 +477,8 @@ void Boss3::portalAttack(double deltaTime)
 {
 	if (_anim->getCurrentAnim() == AnimatedSpriteComponent::AngraDisappear && _anim->animationFinished())
 	{
-		_body->getBody()->SetActive(false);
-		_arm->setActive(false);
+		_body->getBody()->SetEnabled(false);
+		_arm->SetEnabled(false);
 		_anim->setVisible(false);
 		realGone = true;
 	}
@@ -487,8 +486,8 @@ void Boss3::portalAttack(double deltaTime)
 	{
 		if (_timeOut > timeToReapear)
 		{
-			_body->getBody()->SetActive(true);
-			_arm->setActive(true);
+			_body->getBody()->SetEnabled(true);
+			_arm->SetEnabled(true);
 			_anim->setVisible(true);
 			_doSomething = _game->random(2000, 3000);
 			_actualState = Moving;
@@ -627,7 +626,7 @@ void Boss3::AngraSoldierSpawn()
 
 	_myGun->setArmTexture(_game->getTexture("AngraArmImprovedRifle"));
 	_arm->setTexture(_game->getTexture("AngraArmImprovedRifle"));
-	_arm->setActive(true);
+	_arm->SetEnabled(true);
 	_arm->getComponent<CustomAnimatedSpriteComponent>()->setVisible(true);
 	_arm->setOffSet(Vector2D(28, 15));
 }
@@ -779,7 +778,7 @@ void Boss3::die()
 	_body->filterCollisions(DEAD_ENEMIES, FLOOR | PLATFORMS);
 
 	_game->getSoundManager()->playSFX(_deathSound);
-	_arm->setActive(false);
+	_arm->SetEnabled(false);
 }
 
 BossCorpse::BossCorpse(Game * g, Vector2D pos, Texture* texture) : GameObject(g)

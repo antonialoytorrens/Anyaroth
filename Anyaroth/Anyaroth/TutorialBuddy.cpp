@@ -1,6 +1,6 @@
 #include "TutorialBuddy.h"
 
-TutorialBuddy::TutorialBuddy(Game* g, Player* player, Vector2D pos) : GroundEnemy(g, player, pos, g->getTexture("EnemyMelee")), Enemy(g, player, pos, g->getTexture("TutorialBuddy"), "meleeDeath", "meleeHit", "meleeEnemyHit")
+TutorialBuddy::TutorialBuddy(Game* g, Player* player, Vector2D pos) : Enemy(g, player, pos, g->getTexture("TutorialBuddy"), "meleeDeath", "meleeHit", "meleeEnemyHit"), GroundEnemy(g, player, pos, g->getTexture("EnemyMelee"))
 {
 	_anim->addAnim(AnimatedSpriteComponent::EnemyIdle, 4, true, 200);
 	_anim->addAnim(AnimatedSpriteComponent::EnemyWalk, 1, false);
@@ -27,7 +27,7 @@ void TutorialBuddy::update(double deltaTime)
 		_body->getBody()->SetAwake(true);
 }
 
-void TutorialBuddy::beginCollision(GameObject * other, b2Contact* contact)
+void TutorialBuddy::beginCollision(GameObject * other, b2Contact* /*contact*/)
 {
 	if (other->getTag() == "Bullet" || other->getTag() == "Melee")
 	{

@@ -13,7 +13,7 @@ public:
 		for (int i = 0; i < SIZE; i++) 
 		{
 			_objects.push_back(new T(g));
-			_objects[i]->setActive(false);
+			_objects[i]->SetEnabled(false);
 			_objects[i]->setWorld(getWorld());
 		}
 	};
@@ -26,15 +26,15 @@ public:
 
 	virtual void update(double deltaTime);
 	virtual void render(Camera* c) const;
-	virtual void addBullet(Vector2D pos, Vector2D dir, double angle) {}
+	virtual void addBullet(Vector2D /*pos*/, Vector2D /*dir*/, double /*angle*/) {}
 
 	virtual void addObject(T* object) {	_objects.push_back(object); }
 
 	//const int MAX_SIZE = SIZE;
 	virtual T* getUnusedObject() 
 	{
-		for (int i = 0; i < _objects.size(); i++)
-			if (!_objects[i]->isActive())
+		for (size_t i = 0; i < _objects.size(); i++)
+			if (!_objects[i]->IsEnabled())
 				return _objects[i];
 		return nullptr;
 	}
@@ -51,15 +51,15 @@ public:
 template <typename T, int SIZE>
 void ObjectPool<T, SIZE>::update(double deltaTime) 
 {
-	for (int i = 0; i < _objects.size(); i++)
-		if (_objects[i]->isActive()) 
+	for (size_t i = 0; i < _objects.size(); i++)
+		if (_objects[i]->IsEnabled()) 
 			_objects[i]->update(deltaTime);
 }
 
 template <typename T, int SIZE>
 void ObjectPool<T, SIZE>::render(Camera* c) const 
 {
-	for (int i = 0; i < _objects.size(); i++)
-		if (_objects[i]->isActive())
+	for (size_t i = 0; i < _objects.size(); i++)
+		if (_objects[i]->IsEnabled())
 			_objects[i]->render(c);
 }

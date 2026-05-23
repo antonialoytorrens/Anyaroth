@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Texture.h"
-#include "Box2D/Box2D.h"
+#include <box2d/box2d.h>
 #include <string>
 #include <map>
 
@@ -41,8 +41,8 @@ public:
 	Tilemap(Game* game, Texture* tileSet);
 	~Tilemap();
 
-	virtual bool handleEvent(const SDL_Event& event) { return false; }
-	virtual void update(double deltaTime) {}
+	virtual bool handleEvent(const SDL_Event& /*event*/) { return false; }
+	virtual void update(double /*deltaTime*/) {}
 	virtual void render(Camera* c) const;
 
 	void loadTileMap(const string& filename);

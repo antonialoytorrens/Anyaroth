@@ -32,7 +32,7 @@ Enemy::Enemy(Game* g, Player* player, Vector2D pos, Texture* texture, string dea
 	_hurtParticle = _game->getTexture("Blood");
 }
 
-void Enemy::beginCollision(GameObject * other, b2Contact* contact)
+void Enemy::beginCollision(GameObject * other, b2Contact* /*contact*/)
 {
 	if (other->getTag() == "Bullet" || other->getTag() == "Melee")
 	{

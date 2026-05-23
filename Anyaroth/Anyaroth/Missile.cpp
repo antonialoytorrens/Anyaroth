@@ -39,13 +39,13 @@ Missile::Missile(Game* g, Vector2D pos, GameObject* target) : GameObject(g, "Mis
 	g->getSoundManager()->playSFX("rocketLaunch");
 }
 
-void Missile::beginCollision(GameObject * other, b2Contact * contact)
+void Missile::beginCollision(GameObject * /*other*/, b2Contact * contact)
 {
 	_body->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	_anim->playAnim(AnimatedSpriteComponent::Destroy);
 
 	contact->SetEnabled(false);
-	setActive(false);
+	SetEnabled(false);
 
 	_body->filterCollisions(MISIL, 0);
 
@@ -56,7 +56,7 @@ void Missile::update(double deltaTime)
 {
 	GameObject::update(deltaTime);
 
-	if (isActive())
+	if (IsEnabled())
 	{
 		_targetPos = Vector2D(_targetBody->getBody()->GetPosition().x * M_TO_PIXEL, _targetBody->getBody()->GetPosition().y * M_TO_PIXEL);
 		_myPos = Vector2D(_body->getBody()->GetPosition().x  * M_TO_PIXEL, _body->getBody()->GetPosition().y  * M_TO_PIXEL);

@@ -23,7 +23,7 @@ Interactable::Interactable(Game* g, Vector2D posIni) : GameObject(g, "Interactab
 
 	_interactIndicator->getComponent<AnimatedSpriteComponent>()->playAnim(AnimatedSpriteComponent::Idle);
 
-	_interactIndicator->setActive(false);
+	_interactIndicator->SetEnabled(false);
 	addChild(_interactIndicator);
 }
 
@@ -52,7 +52,7 @@ bool Interactable::handleEvent(const SDL_Event& event)
 	return false;
 }
 
-void Interactable::beginCollision(GameObject * other, b2Contact* contact)
+void Interactable::beginCollision(GameObject * other, b2Contact* /*contact*/)
 {
 	//Deteccion de player
 	if (other->getTag() == "Player")
@@ -70,7 +70,7 @@ void Interactable::beginCollision(GameObject * other, b2Contact* contact)
 			_interactIndicator->getComponent<AnimatedSpriteComponent>()->playAnim(AnimatedSpriteComponent::Idle);
 		}
 		_canInteract = true;
-		_interactIndicator->setActive(true);
+		_interactIndicator->SetEnabled(true);
 		_other = other;
 	}
 }
@@ -84,7 +84,7 @@ void Interactable::endCollision(GameObject * other, b2Contact* contact)
 	if (other->getTag() == "Player" && !(fA->IsSensor() && fB->IsSensor()))
 	{
 		_canInteract = false;
-		_interactIndicator->setActive(false);
+		_interactIndicator->SetEnabled(false);
 		_other = nullptr;
 	}
 }

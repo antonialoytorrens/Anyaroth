@@ -24,7 +24,7 @@ void TutorialBullsEye::update(double deltaTime)
 		_body->getBody()->SetAwake(true);
 }
 
-void TutorialBullsEye::beginCollision(GameObject * other, b2Contact* contact)
+void TutorialBullsEye::beginCollision(GameObject * other, b2Contact* /*contact*/)
 {
 	if (!_hasBeenHit && other->getTag() == "Bullet")
 	{

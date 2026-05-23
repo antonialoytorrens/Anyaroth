@@ -33,7 +33,7 @@ void Trigger::update(double deltaTime)
 	}
 }
 
-void Trigger::beginCollision(GameObject * other, b2Contact * contact)
+void Trigger::beginCollision(GameObject * other, b2Contact * /*contact*/)
 {
 	if (other->isPlayer() && !_triggered)
 	{
@@ -43,7 +43,7 @@ void Trigger::beginCollision(GameObject * other, b2Contact * contact)
 	}
 }
 
-void Trigger::endCollision(GameObject * other, b2Contact * contact)
+void Trigger::endCollision(GameObject * other, b2Contact * /*contact*/)
 {
 	if (other->isPlayer() && _triggered)
 	{
@@ -70,7 +70,7 @@ void Trigger::onTriggerUpdate(function<void()> func)
 
 void Trigger::setPosition(int xPos, int yPos)
 {
-	_body->getBody()->SetTransform({ (float32)(xPos / M_TO_PIXEL), (float32)(yPos / M_TO_PIXEL) }, 0);
+	_body->getBody()->SetTransform({ (float_t)(xPos / M_TO_PIXEL), (float_t)(yPos / M_TO_PIXEL) }, 0);
 }
 
 void Trigger::setCollisionFilters(uint16 collidesWith)

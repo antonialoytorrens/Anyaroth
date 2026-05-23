@@ -1,7 +1,7 @@
 #include "ButtonUI.h"
 #include "Game.h"
 
-ButtonUI::ButtonUI(Game* game, Texture* image, const Callback& callback, Frames frames, int arrayPos) : FramedImageUI(game, image)
+ButtonUI::ButtonUI(Game* game, Texture* image, const Callback& callback, Frames frames, int /*arrayPos*/) : FramedImageUI(game, image)
 {
 	setFrames(frames);
 	_frame = _onOutFrame;
@@ -15,7 +15,7 @@ bool ButtonUI::mouseIsOver()
 
 	Vector2D mousePos = _game->getCurrentState()->getMousePositionOnScreen();
 
-	SDL_Point point = { mousePos.getX(), mousePos.getY() };
+	SDL_Point point = { int(mousePos.getX()), int(mousePos.getY()) };
 
 	return SDL_PointInRect(&point, &winRect);
 }
@@ -121,7 +121,7 @@ bool ButtonUI::handleEvent(const SDL_Event& event)
 	return handle;
 }
 
-void ButtonUI::update(double deltaTime)
+void ButtonUI::update(double /*deltaTime*/)
 {
 	if (_visible && _inputEnable)
 	{

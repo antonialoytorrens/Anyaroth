@@ -4,7 +4,7 @@
 #include "AnimatedSpriteComponent.h"
 #include "Player.h"
 
-DistanceDynamicEnemy::DistanceDynamicEnemy(Game* g, Player* player, Vector2D pos, BulletPool* pool) : DistanceEnemy(g, player, pos, g->getTexture("Trooper"), pool, {27,16}), GroundEnemy(g, player, pos, g->getTexture("Trooper")), Enemy(g, player, pos, g->getTexture("Trooper"), "meleeDeath", "meleeHit", "meleeEnemyHit")
+DistanceDynamicEnemy::DistanceDynamicEnemy(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Enemy(g, player, pos, g->getTexture("Trooper"), "meleeDeath", "meleeHit", "meleeEnemyHit"), DistanceEnemy(g, player, pos, g->getTexture("Trooper"), pool, {27,16}), GroundEnemy(g, player, pos, g->getTexture("Trooper"))
 {
 	_vision = 300;
 	_life = 18;
@@ -78,7 +78,7 @@ void DistanceDynamicEnemy::update(double deltaTime)
 	}
 }
 
-void DistanceDynamicEnemy::attacking(double deltaTime)
+void DistanceDynamicEnemy::attacking(double /*deltaTime*/)
 {
 	bool outRange = _playerDistance.getX() < -_attackRangeX || _playerDistance.getX() > _attackRangeX || _playerDistance.getY() < -_attackRangeY || _playerDistance.getY() > _attackRangeY;
 
@@ -97,7 +97,7 @@ void DistanceDynamicEnemy::attacking(double deltaTime)
 void DistanceDynamicEnemy::die()
 {
 	Enemy::die();
-	_arm->setActive(false);
+	_arm->SetEnabled(false);
 }
 
 void DistanceDynamicEnemy::addSensors()
@@ -112,9 +112,7 @@ void DistanceDynamicEnemy::addSensors()
 	fDef.friction = -26;
 	_body->addFixture(&fDef, this);
 
-	shape;
 	shape.SetAsBox(5 / M_TO_PIXEL, 2 / M_TO_PIXEL, b2Vec2(2, 0), 0);
-	fDef;
 	fDef.shape = &shape;
 	fDef.filter.categoryBits = ENEMIES;
 	fDef.filter.maskBits = FLOOR | PLATFORMS;

@@ -23,7 +23,7 @@ PopUpPanel::PopUpPanel(Game* game) : PanelUI(game)
 	addChild(_nextButtonText);
 
 	_textBlock = vector<TextUI*>(6);
-	for (int i = 0; i < _textBlock.size(); i++)
+	for (size_t i = 0; i < _textBlock.size(); i++)
 	{
 		_textBlock[i] = new TextUI(game, "Line", game->getFont("ARIAL12"), 12, 0, 0, { 255, 255, 255, 255 });
 		_textBlock[i]->setScale(0.8);
@@ -45,7 +45,7 @@ void PopUpPanel::showMessage(PUMessage s)
 	//Ponemos el mensaje
 	vector<string> segments;
 	chopText(s._message, segments);
-	for (int i = 0; i < segments.size(); i++)
+	for (size_t i = 0; i < segments.size(); i++)
 	{
 		if (i >= _textBlock.size())
 		{
@@ -75,7 +75,7 @@ void PopUpPanel::chopText(string s, vector<string>& segments)
 
 	if (width > maxWidth)
 	{
-		int i = 0;
+		size_t i = 0;
 		bool finish = false;
 		while ((i < _textBlock.size() && !finish) || !finish)
 		{
@@ -84,7 +84,7 @@ void PopUpPanel::chopText(string s, vector<string>& segments)
 				istream_iterator<string>());
 
 			string aux = "";
-			int j = 0;
+			size_t j = 0;
 			TTF_SizeText(_game->getFont("ARIAL12")->getTTFFont(), aux.c_str(), &width, nullptr);
 			while (j < results.size() && width < maxWidth)
 			{
@@ -110,7 +110,7 @@ void PopUpPanel::chopText(string s, vector<string>& segments)
 		segments.push_back(s);
 }
 
-void PopUpPanel::nextMessage(Game* game)
+void PopUpPanel::nextMessage(Game* /*game*/)
 {
 	if (_messages.size() > 0)
 	{
@@ -124,7 +124,7 @@ void PopUpPanel::nextMessage(Game* game)
 		close();
 }
 
-void PopUpPanel::omitAllMessages(Game * game)
+void PopUpPanel::omitAllMessages(Game * /*game*/)
 {
 	while(_messages.size() != 0)
 		_messages.pop();
@@ -136,9 +136,9 @@ void PopUpPanel::reorder()
 	_frame->setPosition(CAMERA_RESOLUTION_X / 2 - _frame->getW() / 2, CAMERA_RESOLUTION_Y / 2 - _frame->getH() / 2);
 	_title->setPosition(CAMERA_RESOLUTION_X / 2 - _title->getW() / 2, _frame->getY() + 2);
 
-	for (int i = 0; i < _textBlock.size(); i++)
+	for (size_t i = 0; i < _textBlock.size(); i++)
 	{
-		if(i - 1 < 0)
+		if(i == 0)
 			_textBlock[i]->setPosition(_frame->getX() + 5, _title->getY() + _title->getH() + 2);
 		else
 			_textBlock[i]->setPosition(_frame->getX() + 5, _textBlock[i - 1]->getY() + _textBlock[i]->getH());

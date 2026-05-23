@@ -1,11 +1,11 @@
 #include "MoveEvent.h"
 
-MoveEvent::MoveEvent(BodyComponent* body, int dir, int speed, int xDestination):  _dir(dir), _speed(speed), _xDestination(xDestination)
+MoveEvent::MoveEvent(BodyComponent* body, int dir, int speed, int xDestination):  _dir(dir), _xDestination(xDestination), _speed(speed)
 {
 	_myBody = body->getBody();
 }
 
-void MoveEvent::update(double time)
+void MoveEvent::update(double /*time*/)
 {
 	if (_dir > 1)
 	{

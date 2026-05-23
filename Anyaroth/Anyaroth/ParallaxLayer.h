@@ -23,5 +23,5 @@ public:
 	inline float getSpeed() const { return _speed; }
 	inline void changeDir(bool leftDir) { _leftDir = leftDir; }
 	
-	inline bool checkCameraStatus(pair<bool, int> status) { return true; }
+	inline bool checkCameraStatus(pair<bool, int> /*status*/) { return true; }
 };
