@@ -1,0 +1,38 @@
+services:
+  build:
+    image: anyaroth:gcc
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CXX: g++
+    container_name: anyaroth-build-gcc
+    volumes:
+      - ./Anyaroth/bin:/out
+    command: sh -c "cp /src/Anyaroth/bin/Anyaroth /out/Anyaroth-gcc && echo 'Built /out/Anyaroth-gcc'"
+
+  build-clang:
+    image: anyaroth:clang
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CXX: clang++-19
+    container_name: anyaroth-build-clang
+    volumes:
+      - ./Anyaroth/bin:/out
+    command: sh -c "cp /src/Anyaroth/bin/Anyaroth /out/Anyaroth-clang && echo 'Built /out/Anyaroth-clang'"
+
+  build-debug:
+    image: anyaroth:debug
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CXX: g++
+    container_name: anyaroth-build-debug
+    environment:
+      DEBUG: "1"
+    volumes:
+      - ./Anyaroth/bin:/out
+    command: sh -c "cd /src/Anyaroth && make distclean && make DEBUG=1 -j$(nproc) && cp bin/Anyaroth /out/Anyaroth-debug"
