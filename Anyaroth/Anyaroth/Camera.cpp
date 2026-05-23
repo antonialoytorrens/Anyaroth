@@ -240,8 +240,9 @@ void Camera::last_render() const
 	if (_isFading || (_fadeIsFinished && _onFadeComplete != nullptr))
 	{
 		Texture tex = Texture(_game->getRenderer());
-		Uint8 alpha = (_fadeTime / _fadeMaxTime) * 255;
-		if (alpha > 255) alpha = 255;
+		int alphaVal = (_fadeTime / _fadeMaxTime) * 255;
+		if (alphaVal > 255) alphaVal = 255;
+		Uint8 alpha = static_cast<Uint8>(alphaVal);
 		tex.load(_cameraRect.w, _cameraRect.h, 0, 0, 0, _fadeMaxTime < 0 ? alpha : 255 - alpha);
 		tex.render({ 0, 0, GAME_RESOLUTION_X, GAME_RESOLUTION_Y });
 	}

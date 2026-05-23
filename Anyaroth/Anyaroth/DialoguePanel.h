@@ -59,8 +59,8 @@ public:
 
 	inline bool isConversating() const { return _isConversating; }
 	inline bool isOpened() const { return _opened; }
-	inline bool conversationEnd() const { return _currentText == _dialogue.conversation.size() - 1; }
-	inline bool conversationRealEnd() const { return _currentText == _dialogue.conversation.size(); }
+	inline bool conversationEnd() const { return static_cast<size_t>(_currentText) == _dialogue.conversation.size() - 1; }
+	inline bool conversationRealEnd() const { return static_cast<size_t>(_currentText) == _dialogue.conversation.size(); }
 
 	inline void stopAtLastLineShown(bool b) { _keepLastLine = b; }
 

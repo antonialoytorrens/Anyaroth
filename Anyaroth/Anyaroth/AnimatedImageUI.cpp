@@ -32,7 +32,7 @@ void AnimatedImageUI::update(double deltaTime)
 		{
 			_frame += (int)_timer / _animations[_currentAnim].lapse;
 
-			if (_frame >= _animations[_currentAnim].numFrames)
+			if (_frame >= static_cast<int>(_animations[_currentAnim].numFrames))
 			{
 				_animations[_currentAnim].animationFinished = true;
 				_frame = _animations[_currentAnim].numFrames - 1;
