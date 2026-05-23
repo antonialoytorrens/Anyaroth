@@ -46,7 +46,7 @@ void GravityBulletEffect::beginCollision(Bullet* bullet, GameObject * other, b2C
 
 void GravityBulletEffect::update(Bullet* bullet, double time)
 {
-	if (bullet->isActive())
+	if (bullet->IsEnabled())
 	{
 		bullet->GameObject::update(time);
 

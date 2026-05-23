@@ -30,5 +30,5 @@ public:
 	virtual void beginCollision(GameObject* other, b2Contact* contact);
 	virtual void endCollision(GameObject* other, b2Contact* contact);
 
-	inline bool isActive() const { return (_body != nullptr && _body->getBody() != nullptr); }
+	inline bool IsEnabled() const { return (_body != nullptr && _body->getBody() != nullptr); }
 };

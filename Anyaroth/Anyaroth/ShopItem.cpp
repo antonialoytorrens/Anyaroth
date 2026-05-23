@@ -35,16 +35,14 @@ void ShopItem::setSize(int w, int h)
 
 void ShopItem::setItemInfo(const ItemInfo & info)
 {
-	if (&info != nullptr) {
-		_info = info;
+	_info = info;
 
-		//Frame (cambio al frame del color por rareza)
-		setImage(_game->getTexture(_info._rarityFrame));
-		//Cambio del icono del arma
-		_weaponIcon->setImage(_game->getTexture(_info._iconName));
-		//Ajustamos tama�os
-		setSize(getImage()->getW(), getImage()->getH());
-	}
+	//Frame (cambio al frame del color por rareza)
+	setImage(_game->getTexture(_info._rarityFrame));
+	//Cambio del icono del arma
+	_weaponIcon->setImage(_game->getTexture(_info._iconName));
+	//Ajustamos tama�os
+	setSize(getImage()->getW(), getImage()->getH());
 }
 
 void ShopItem::setChosen(bool selected)

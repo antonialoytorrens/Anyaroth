@@ -9,7 +9,7 @@ private:
 	DialoguePanel* _dialoguePanel = nullptr;
 
 public:
-	DialogueEvent(DialoguePanel* dialoguePanel, Dialogue dialogue) : _dialoguePanel(dialoguePanel), _dialogue(dialogue) {}
+	DialogueEvent(DialoguePanel* dialoguePanel, Dialogue dialogue) : _dialogue(dialogue), _dialoguePanel(dialoguePanel) {}
 	virtual ~DialogueEvent() {};
 
 	virtual void update(double time);

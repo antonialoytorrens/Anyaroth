@@ -8,11 +8,11 @@ class Boss1 : public Boss
 {
 private:
 	Vector2D _amplitude = Vector2D(150, 25), _velocity = Vector2D(0.8, 0.8), _dir = Vector2D(1, 0);
-	double  _damage = 50, _angularFrequency = 0.05, _k = _angularFrequency / _velocity.distance(Vector2D());
+	double _angularFrequency = 0.05, _k = _angularFrequency / _velocity.distance(Vector2D());
 
 	//Cosas para el ataque bombardero
 	BomberGun* _bombGun = nullptr;
-	int _bomberAttackTime = 2500, _timeOnBomberAttack = 0, _timeBeetwenBombs = 0, _bombRange = 1000;
+	int _bomberAttackTime = 2500, _timeOnBomberAttack = 0, _timeBeetwenBombs = 0;
 
 	//Cosas Melee
 	Melee* _melee;
@@ -20,7 +20,7 @@ private:
 
 	//Cosas de la ronda disparos
 	bool ida = true;
-	int _shootingTime = 2500, _timeOnShooting = 0, _timeBeetwenBullets = 50;
+	int _timeOnShooting = 0, _timeBeetwenBullets = 50;
 	int _numBullets = 10, _actualBullet = 0, _dirB;
 	double _angleIncrease = 7.5, _inicialAngle = 0, _angle = 0;
 

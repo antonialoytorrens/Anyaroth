@@ -2,7 +2,7 @@
 #include "Component.h"
 
 class GameObject;
-typedef union SDL_Event;
+union SDL_Event;
 
 class InputComponent : public Component
 {

@@ -10,6 +10,7 @@ GameState* GameStateMachine::currentState()
 {
 	if (!_states.empty())
 		return _states.top();
+	return nullptr;
 }
 
 void GameStateMachine::pushState(GameState* newState)

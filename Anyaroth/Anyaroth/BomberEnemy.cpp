@@ -49,7 +49,7 @@ void BomberEnemy::shoot(double deltaTime)
 
 void BomberEnemy::move()
 {
-	_body->getBody()->SetLinearVelocity({ _speed*(float32)_dir.getX(), _body->getBody()->GetLinearVelocity().y });
+	_body->getBody()->SetLinearVelocity({ _speed*(float_t)_dir.getX(), _body->getBody()->GetLinearVelocity().y });
 }
 
 void BomberEnemy::update(double deltaTime)

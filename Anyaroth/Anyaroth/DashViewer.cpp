@@ -15,6 +15,6 @@ void DashViewer::update(double deltaTime)
 {
 	AnimatedImageUI::update(deltaTime);
 
-	if (_animations[_currentAnim].name = DashAnimations::Cooldown && _animations[_currentAnim].animationFinished)
+	if (_animations[_currentAnim].name == DashAnimations::Cooldown && _animations[_currentAnim].animationFinished)
 		playAnim(DashAnimations::Icon);
 }

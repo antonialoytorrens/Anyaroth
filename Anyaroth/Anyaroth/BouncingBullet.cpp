@@ -34,7 +34,7 @@ void BouncingBullet::endCollision(GameObject * other, b2Contact* contact)
 
 void BouncingBullet::update(double deltaTime)
 {
-	if (isActive()) {
+	if (IsEnabled()) {
 
 		double dist = _iniPos.distance(_transform->getPosition());
 		GameObject::update(time);
@@ -51,7 +51,7 @@ void BouncingBullet::update(double deltaTime)
 			}
 			else
 			{
-				_body->getBody()->SetActive(false);
+				_body->getBody()->SetEnabled(false);
 				_anim->playAnim(AnimatedSpriteComponent::Destroy);
 			}
 		}

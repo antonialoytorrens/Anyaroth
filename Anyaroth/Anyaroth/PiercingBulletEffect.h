@@ -3,8 +3,6 @@
 class PiercingBulletEffect :
 	public BulletEffect
 {
-private:
-	bool _destroy = false; //true si colisiona con suelo
 public:
 	PiercingBulletEffect();
 	virtual ~PiercingBulletEffect();

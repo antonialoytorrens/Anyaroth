@@ -2,7 +2,7 @@
 #include "Game.h"
 
 
-OptionsPanel::OptionsPanel(Game* g, bool mainMenu) : _menu(mainMenu), PanelUI(g)
+OptionsPanel::OptionsPanel(Game* g, bool mainMenu) : PanelUI(g), _menu(mainMenu)
 {
 	//----BOTONES----//
 

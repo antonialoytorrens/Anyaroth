@@ -18,9 +18,9 @@ Bullet::Bullet(Game* game) : GameObject(game)
 	_body->getBody()->SetBullet(true);
 	_body->getBody()->SetFixedRotation(true);
 	_body->getBody()->SetGravityScale(0);
-	_body->getBody()->SetActive(false);
+	_body->getBody()->SetEnabled(false);
 
-	setActive(false);
+	SetEnabled(false);
 }
 
 Bullet::~Bullet()
@@ -29,7 +29,7 @@ Bullet::~Bullet()
 
 void Bullet::beginCollision(GameObject * other, b2Contact* contact)
 {
-	if (isActive() && _effect != nullptr)
+	if (IsEnabled() && _effect != nullptr)
 		_effect->beginCollision(this, other, contact);
 
 	if (other->getTag() == "Ground" || other->getTag() == "Platform" || other->getTag() == "Door")
@@ -38,7 +38,7 @@ void Bullet::beginCollision(GameObject * other, b2Contact* contact)
 
 void Bullet::endCollision(GameObject * other, b2Contact* contact)
 {
-	if (isActive() && _effect != nullptr)
+	if (IsEnabled() && _effect != nullptr)
 		_effect->endCollision(this, other, contact);
 }
 
@@ -55,10 +55,10 @@ void Bullet::init(Texture* texture, const Vector2D& position, double speed, doub
 	_texture = texture;
 	_transform->setRotation(angle);
 
-	_body->getBody()->SetActive(true);
+	_body->getBody()->SetEnabled(true);
 	_body->setW(((_texture->getW() / _texture->getNumCols()) / 2));
 	_body->setH(((_texture->getH() / _texture->getNumFils()) / 2));
-	_body->getBody()->SetTransform({ (float32)(position.getX() / M_TO_PIXEL), (float32)(position.getY() / M_TO_PIXEL) }, _body->getBody()->GetAngle());
+	_body->getBody()->SetTransform({ (float_t)(position.getX() / M_TO_PIXEL), (float_t)(position.getY() / M_TO_PIXEL) }, _body->getBody()->GetAngle());
 	_body->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 
 	_body->filterCollisions(PLAYER_BULLETS, FLOOR | PLATFORMS | ENEMIES);
@@ -69,12 +69,12 @@ void Bullet::init(Texture* texture, const Vector2D& position, double speed, doub
 	_anim->setTexture(texture);
 	setAnimations(type);
 
-	setActive(true);
+	SetEnabled(true);
 }
 
 void Bullet::update(double deltaTime)
 {
-	if (isActive() && _effect != nullptr)
+	if (IsEnabled() && _effect != nullptr)
 		_effect->update(this, deltaTime);
 }
 
@@ -120,7 +120,7 @@ void Bullet::setAnimations(BulletAnimType type)
 }
 void Bullet::reset()
 {
-	if (isActive() && _effect != nullptr)
+	if (IsEnabled() && _effect != nullptr)
 	{
 		_effect->reset(this);
 		_anim->reset();

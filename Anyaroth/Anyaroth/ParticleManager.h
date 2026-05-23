@@ -21,7 +21,7 @@ private:
 		double gravScale;
 		double timeToSpawn;
 
-		const bool operator <(const ParticleData  other)const
+		bool operator <(const ParticleData  other)const
 		{
 			return (timeToSpawn > other.timeToSpawn);
 		}
@@ -35,7 +35,6 @@ private:
 	ParticlePool * _pull;
 	priority_queue< ParticleData, vector<ParticleData>, less<ParticleData>> _ParticleQueue;
 
-	Game * _game;
 	double timer = 0;
 
 public:

@@ -7,15 +7,14 @@ class Boss3;
 class FloatingHead : public StaticFlyingEnemy
 {
 private:
-	Boss3 * _boss = nullptr;
 	EnemyLifePanel * _lifePanel;
 
 	bool _invincibility = true, _changeAngle = false, _shooting = false;
-	double _timeBetweenShoots = 1000, _currentTimer = 500, _timeShooting = 0;
+	double _currentTimer = 500, _timeShooting = 0;
 	int _numOfShoots = 15;
 
 public:
-	FloatingHead(Game* g, Player* player, Vector2D pos, BulletPool* pool, Boss3 * boss);
+	FloatingHead(Game* g, Player* player, Vector2D pos, BulletPool* pool);
 	virtual ~FloatingHead() {}
 
 	virtual void update(double deltaTime);

@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "Shop.h"
 
-Shop::Shop(Game* g, Vector2D posIni, ShopMenu* shop) : _shop(shop), Interactable(g, Vector2D(posIni.getX() - 136, posIni.getY() - 249))
+Shop::Shop(Game* g, Vector2D posIni, ShopMenu* shop) : Interactable(g, Vector2D(posIni.getX() - 136, posIni.getY() - 249)), _shop(shop)
 {
 	//----EDIFICIO----//
 

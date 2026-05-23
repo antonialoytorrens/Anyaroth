@@ -61,7 +61,7 @@ public:
 	enum Throne {
 		ThroneIdle, ThroneEnd1, ThroneEnd2
 	};
-	AnimatedSpriteComponent(GameObject* obj) : SpriteComponent(obj), PhysicsComponent(obj), RenderComponent(obj), Component(), _obj(obj) {}
+	AnimatedSpriteComponent(GameObject* obj) : Component(), RenderComponent(obj), SpriteComponent(obj), PhysicsComponent(obj), _obj(obj) {}
 	virtual ~AnimatedSpriteComponent() {}
 
 	virtual void render(Camera* c) const;

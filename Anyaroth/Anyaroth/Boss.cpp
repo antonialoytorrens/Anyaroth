@@ -1,6 +1,6 @@
 #include "Boss.h"
 
-Boss::Boss(Game * g, Player * player, Vector2D pos, BulletPool* pool, Texture* text) : DistanceEnemy(g, player, pos, text, pool), Enemy(g, player, pos, text)
+Boss::Boss(Game * g, Player * player, Vector2D pos, BulletPool* pool, Texture* text) : Enemy(g, player, pos, text), DistanceEnemy(g, player, pos, text, pool)
 {
 	_affectedByExternalForces = false;
 }
@@ -110,9 +110,7 @@ void Boss::addSensors()
 	fDef.friction = -26;
 	_body->addFixture(&fDef, this);
 
-	shape;
 	shape.SetAsBox(5 / M_TO_PIXEL, 2 / M_TO_PIXEL, b2Vec2(2, 2), 0);
-	fDef;
 	fDef.shape = &shape;
 	fDef.filter.categoryBits = ENEMIES;
 	fDef.filter.maskBits = FLOOR | PLATFORMS;

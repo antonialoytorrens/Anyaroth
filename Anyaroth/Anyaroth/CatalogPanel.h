@@ -26,7 +26,6 @@ class CatalogPanel : public PanelUI
 		list<ShopItem*>* _items;
 
 		ShopItem* _selectedItem = nullptr;
-		ImageUI* _itemIndicator = nullptr;
 		CoinsCounter* _playerMoney = nullptr;
 
 		int itemsPerRow = 2;

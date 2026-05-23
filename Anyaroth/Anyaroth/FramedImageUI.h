@@ -13,6 +13,6 @@ public:
 	virtual void render() const;
 
 	inline void changeFrame(int frame) { _frame = frame; }
-	inline const int getFrame() const { return _frame; }
+	inline int getFrame() const { return _frame; }
 };
 

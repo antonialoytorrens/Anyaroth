@@ -27,7 +27,7 @@ SpawnerEnemy::SpawnerEnemy(Game* g, Player* player, Vector2D pos) : Enemy(g, pla
 
 void SpawnerEnemy::move()
 {
-	_body->getBody()->SetLinearVelocity({ _speed*(float32)_dir.getX(), _body->getBody()->GetLinearVelocity().y });
+	_body->getBody()->SetLinearVelocity({ _speed*(float_t)_dir.getX(), _body->getBody()->GetLinearVelocity().y });
 }
 
 void SpawnerEnemy::update(double deltaTime)

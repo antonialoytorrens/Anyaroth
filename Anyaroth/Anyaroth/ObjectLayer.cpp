@@ -15,8 +15,8 @@ ObjectLayer::ObjectLayer(std::string filename, std::string name) : _name(name)
 		file >> j;
 		j = j["layers"];
 
-		int i = 0;
-		bool cont = true, found = true;
+		size_t i = 0;
+		bool cont = true;
 
 		while (i < j.size() && cont)
 		{
@@ -37,7 +37,7 @@ ObjectLayer::ObjectLayer(std::string filename, std::string name) : _name(name)
 			j = *it;
 			double x = 0, y = 0;
 
-			for (int i = 0; i < j.size(); i++)
+			for (size_t i = 0; i < j.size(); i++)
 			{
 				it = j[i].find("x");
 				if (it != j[i].end())

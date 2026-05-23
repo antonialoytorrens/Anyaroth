@@ -1,17 +1,20 @@
 #include "GameObject.h"
 #include "Game.h"
+#include "Texture.h"
+#include <algorithm>
 
-GameObject::GameObject(Game* game, string tag) : _game(game), _inputComp(), _physicsComp(), _renderComp(), _tag(tag)
+GameObject::GameObject(Game* game, string tag) : _physicsComp(), _inputComp(), _renderComp(), _tag(tag), _game(game)
 {
 	if (game != nullptr) _world = game->getCurrentState()->getWorld();
 }
 
-GameObject::~GameObject() 
+GameObject::~GameObject()
 {
+	const string textureKey = typeid(Texture).name();
 	for (auto it = _components.begin(); it != _components.end(); it++)
 	{
 		//No borra las Texturas porque de eso se encarga ~Game();
-		if (it->first != "class Texture")
+		if (it->first != textureKey)
 		{
 			delete it->second;
 			it->second = nullptr;
@@ -36,7 +39,7 @@ bool GameObject::handleEvent(const SDL_Event& event)
 	auto it = _children.begin();
 	while (!handled && it != _children.end())
 	{
-		if ((*it)->isActive())
+		if ((*it)->IsEnabled())
 			handled = (*it)->handleEvent(event);
 		if(!handled) it++;
 	}
@@ -51,7 +54,7 @@ void GameObject::update(double deltaTime)
 
 	//Llama al update de los hijos
 	for (GameObject* child : _children)
-		if (child->isActive())
+		if (child->IsEnabled())
 			child->update(deltaTime);
 }
 
@@ -62,7 +65,7 @@ void GameObject::render(Camera* c) const
 
 	//Llama al render de los hijos
 	for (GameObject* child : _children)
-		if (child->isActive())
+		if (child->IsEnabled())
 			child->render(c);
 }
 

@@ -20,9 +20,9 @@ void ExplosiveBulletEffect::init(Bullet* bullet)
 	bullet->getBody()->getBody()->SetBullet(true);
 	bullet->getBody()->getBody()->SetFixedRotation(true);
 	bullet->getBody()->getBody()->SetGravityScale(6);
-	bullet->getBody()->getBody()->SetActive(true);
+	bullet->getBody()->getBody()->SetEnabled(true);
 
-	bullet->setActive(true);
+	bullet->SetEnabled(true);
 }
 
 void ExplosiveBulletEffect::beginCollision(Bullet* bullet, GameObject * other, b2Contact * contact)
@@ -37,7 +37,7 @@ void ExplosiveBulletEffect::beginCollision(Bullet* bullet, GameObject * other, b
 
 void ExplosiveBulletEffect::update(Bullet* bullet, double time)
 {
-	if (bullet->isActive())
+	if (bullet->IsEnabled())
 	{
 		double dist = bullet->getIniPos().distance(bullet->getTransform()->getPosition());
 
@@ -71,7 +71,7 @@ void ExplosiveBulletEffect::update(Bullet* bullet, double time)
 				else
 				{
 					bullet->getComponent<AnimatedSpriteComponent>()->playAnim(AnimatedSpriteComponent::Destroy);
-					bullet->getComponent<BodyComponent>()->getBody()->SetActive(false);
+					bullet->getComponent<BodyComponent>()->getBody()->SetEnabled(false);
 				}
 			}
 			else

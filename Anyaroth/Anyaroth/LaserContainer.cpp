@@ -22,7 +22,7 @@ LaserContainer::LaserContainer(Game* g, Vector2D pos, Texture* container, Textur
 void LaserContainer::render(Camera* c) const
 {
 	//Llama al render de los hijos
-	if (_laser->isActive())
+	if (_laser->IsEnabled())
 		_laser->render(c);
 
 	for (auto rc : getRenderComponents())

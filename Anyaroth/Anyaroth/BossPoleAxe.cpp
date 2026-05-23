@@ -17,7 +17,7 @@ BossPoleAxe::~BossPoleAxe() {}
 
 void BossPoleAxe::update(double deltaTime)
 {
-	if (isActive())
+	if (IsEnabled())
 	{
 		_center = { _owner->getBody()->GetPosition().x * M_TO_PIXEL,_owner->getBody()->GetPosition().y * M_TO_PIXEL };
 		PoleAxe::update(deltaTime);

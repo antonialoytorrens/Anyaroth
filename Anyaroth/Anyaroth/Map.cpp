@@ -49,7 +49,7 @@ Map::Map(string filename, Game* game, Player* player, Texture* tileset, BulletPo
 		file >> j;
 		j = j["layers"];
 
-		for (int i = 0; i < j.size(); i++)
+		for (size_t i = 0; i < j.size(); i++)
 		{
 			auto it = j[i].find("name");
 			if (it != j[i].end())
@@ -78,7 +78,7 @@ Map::Map(string filename, Game* game, Player* player, Texture* tileset, BulletPo
 
 Map::~Map()
 {
-	for (int i = 0; i < _objectLayers.size(); i++)
+	for (size_t i = 0; i < _objectLayers.size(); i++)
 		delete _objectLayers[i];
 
 	_objectLayers.clear();
@@ -90,12 +90,12 @@ void Map::createObjects()
 	Boss2* azura = nullptr;
 	Boss3* angra = nullptr;
 
-	for (int i = 0; i < _objectLayers.size(); i++)
+	for (size_t i = 0; i < _objectLayers.size(); i++)
 	{
 		string name = _objectLayers[i]->getName();
 		vector<pair<Vector2D, string>> objectData = _objectLayers[i]->getObjectsData();
 
-		for (int j = 0; j < objectData.size(); j++)
+		for (size_t j = 0; j < objectData.size(); j++)
 		{
 			Vector2D pos = objectData[j].first;
 			string data = objectData[j].second;
@@ -195,7 +195,7 @@ void Map::createObjects()
 			}
 			else if (name == "FloatingHead")
 			{
-				FloatingHead* head = new FloatingHead(_game, _player, Vector2D(pos.getX(), pos.getY() - TILES_SIZE), _bulletPool, angra);
+				FloatingHead* head = new FloatingHead(_game, _player, Vector2D(pos.getX(), pos.getY() - TILES_SIZE), _bulletPool);
 
 				_game->getCurrentState()->getPlayHUD()->getEnemyLifePanel()->addEnemy(head);
 				head->setLifePanel(_game->getCurrentState()->getPlayHUD()->getEnemyLifePanel());
@@ -244,7 +244,7 @@ void Map::createObjects()
 			else if (name == "AngraCorpse")
 			{
 			BossCorpse* _corpse = new BossCorpse(_game, Vector2D(0, 0), _game->getTexture("AngraCorpse"));
-			_corpse->setActive(false);
+			_corpse->SetEnabled(false);
 			angra->setAnimCorpse(_corpse);
 			_objects->addChildFront(_corpse);
 			}

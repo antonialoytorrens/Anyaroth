@@ -8,7 +8,7 @@
 class BomberEnemy : public Enemy
 {
 private:
-	double _shootTime = 1000, _angle = 90, _range = 600;
+	double _shootTime = 1000, _angle = 90;
 	Vector2D _dir = Vector2D();
 
 	BulletPool* _myBulletPool = nullptr;

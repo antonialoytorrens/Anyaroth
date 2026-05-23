@@ -21,7 +21,7 @@ void BulletEffect::beginCollision(Bullet* bullet, GameObject * other, b2Contact*
 
 void BulletEffect::update(Bullet* bullet, double time)
 {
-	if (bullet->isActive())
+	if (bullet->IsEnabled())
 	{
 		double dist = bullet->getIniPos().distance(bullet->getTransform()->getPosition());
 
@@ -38,7 +38,7 @@ void BulletEffect::update(Bullet* bullet, double time)
 				reset(bullet);
 			else
 			{
-				bullet->getComponent<BodyComponent>()->getBody()->SetActive(false);
+				bullet->getComponent<BodyComponent>()->getBody()->SetEnabled(false);
 				bullet->getComponent<AnimatedSpriteComponent>()->playAnim(AnimatedSpriteComponent::Destroy);
 			}
 		}
@@ -48,9 +48,9 @@ void BulletEffect::update(Bullet* bullet, double time)
 void BulletEffect::reset(Bullet* bullet)
 {
 	bullet->getComponent<AnimatedSpriteComponent>()->playAnim(AnimatedSpriteComponent::Default);
-	bullet->setActive(false);
+	bullet->SetEnabled(false);
 	bullet->setAliveTime(0);
 	bullet->setCollided(false);
 	bullet->getComponent<AnimatedSpriteComponent>()->reset();
-	bullet->getComponent<BodyComponent>()->getBody()->SetActive(false);
+	bullet->getComponent<BodyComponent>()->getBody()->SetEnabled(false);
 }

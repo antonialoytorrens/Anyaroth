@@ -4,7 +4,7 @@
 
 void AnimatedSpriteComponent::render(Camera* c) const
 {
-	if (_obj->isActive() && _renderActive)
+	if (_obj->IsEnabled() && _renderActive)
 	{
 		SDL_Rect destRect;
 		destRect.w = (_texture->getW() / _texture->getNumCols()) * _transform->getScale().getX();
@@ -12,10 +12,10 @@ void AnimatedSpriteComponent::render(Camera* c) const
 		destRect.x = _transform->getPosition().getX() - _transform->getAnchor().getX() * destRect.w - c->getCameraPosition().getX();
 		destRect.y = _transform->getPosition().getY() - _transform->getAnchor().getY() * destRect.h - c->getCameraPosition().getY();
 
-		SDL_Rect winRect = { destRect.x * GAME_RESOLUTION_X / c->getCameraSize().getX(), destRect.y * GAME_RESOLUTION_Y / c->getCameraSize().getY(),
-							destRect.w * GAME_RESOLUTION_X / c->getCameraSize().getX() + 1, destRect.h * GAME_RESOLUTION_Y / c->getCameraSize().getY() + 1 }; //+1 para el tema del Zoom
+		SDL_Rect winRect = { int(destRect.x * GAME_RESOLUTION_X / c->getCameraSize().getX()), int(destRect.y * GAME_RESOLUTION_Y / c->getCameraSize().getY()),
+							int(destRect.w * GAME_RESOLUTION_X / c->getCameraSize().getX() + 1), int(destRect.h * GAME_RESOLUTION_Y / c->getCameraSize().getY() + 1) }; //+1 para el tema del Zoom
 
-		SDL_Point anchor = { _transform->getAnchor().getX() * winRect.w, _transform->getAnchor().getY() * winRect.h };
+		SDL_Point anchor = { int(_transform->getAnchor().getX() * winRect.w), int(_transform->getAnchor().getY() * winRect.h) };
 
 		_texture->renderFrame(winRect, _currentAnim, _frame, _transform->getRotation(), anchor, (_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
 	}

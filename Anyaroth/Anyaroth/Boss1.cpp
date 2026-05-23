@@ -6,7 +6,7 @@
 #include "GameManager.h"
 #include "CutScene.h"
 
-Boss1::Boss1(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Boss(g, player, pos, pool, g->getTexture("Spenta")), Enemy(g, player, pos, g->getTexture("Spenta"), "boss1Interfase3", "boss1Hit")
+Boss1::Boss1(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Enemy(g, player, pos, g->getTexture("Spenta"), "boss1Interfase3", "boss1Hit"), Boss(g, player, pos, pool, g->getTexture("Spenta"))
 {
 	_life = 250;
 	_life1 = _life2 = _life3 = _life;
@@ -63,7 +63,7 @@ Boss1::Boss1(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Boss(g, 
 
 	_armVision = true;
 
-	_arm->setActive(false); //poner invisible el brazo del boss
+	_arm->SetEnabled(false); //poner invisible el brazo del boss
 
 	_playerBody = _player->getComponent<BodyComponent>();
 
@@ -91,7 +91,7 @@ void Boss1::update(double deltaTime)
 				if (GameManager::getInstance()->getCurrentLevel() == LevelManager::BossDemo)
 				{
 					_game->getCurrentState()->getMainCamera()->fadeOut(3000);
-					_game->getCurrentState()->getMainCamera()->onFadeComplete([this](Game* game)
+					_game->getCurrentState()->getMainCamera()->onFadeComplete([](Game* game)
 					{
 						game->popState();
 						game->changeState(new CreditsState(game));
@@ -162,7 +162,7 @@ void Boss1::meleeAttack()
 
 void Boss1::checkMelee(double deltaTime)
 {
-	if (_melee != nullptr && _melee->isActive())
+	if (_melee != nullptr && _melee->IsEnabled())
 	{
 		if (_timeOnMelee > _timeMelee)
 		{

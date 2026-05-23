@@ -7,7 +7,7 @@
 bool SpawnerBoss::_spawnTurn = false;
 bool SpawnerBoss::_spawnDone = false;
 
-SpawnerBoss::SpawnerBoss(Game* g,Player* player, Vector2D pos, int typeSpawn,BulletPool * pool) :_player(player), _typeSpawn(typeSpawn),_pool(pool), GameObject(g, "Spawn")
+SpawnerBoss::SpawnerBoss(Game* g,Player* player, Vector2D pos, int typeSpawn,BulletPool * pool) : GameObject(g, "Spawn"), _player(player), _pool(pool), _typeSpawn(typeSpawn)
 {
 	_transform = addComponent<TransformComponent>();
 	_transform->setPosition(pos.getX(), pos.getY());

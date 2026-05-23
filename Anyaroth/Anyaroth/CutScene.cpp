@@ -101,7 +101,7 @@ void CutScene::addFlipEvent()
 
 void CutScene::addChangeLevelEvent()
 {
-	_events.push(new ChangeLevelEvent(_player));
+	_events.push(new ChangeLevelEvent());
 }
 
 void CutScene::addShopEvent(ShopMenu* shop)

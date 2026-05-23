@@ -4,7 +4,7 @@
 #include "AnimatedSpriteComponent.h"
 #include "Player.h"
 
-MeleeEnemy::MeleeEnemy(Game* g, Player* player, Vector2D pos) : GroundEnemy(g, player, pos, g->getTexture("EnemyMelee")), Enemy(g, player, pos, g->getTexture("EnemyMelee"), "meleeDeath", "meleeHit", "meleeEnemyHit")
+MeleeEnemy::MeleeEnemy(Game* g, Player* player, Vector2D pos) : Enemy(g, player, pos, g->getTexture("EnemyMelee"), "meleeDeath", "meleeHit", "meleeEnemyHit"), GroundEnemy(g, player, pos, g->getTexture("EnemyMelee"))
 {
 	_vision = 300;
 	_life = 10;

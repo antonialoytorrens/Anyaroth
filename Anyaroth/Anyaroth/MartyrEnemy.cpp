@@ -5,7 +5,7 @@
 #include "GameManager.h"
 #include "BodyComponent.h"
 
-MartyrEnemy::MartyrEnemy(Game* g, Player* player, Vector2D pos) : GroundEnemy(g, player, pos, g->getTexture("EnemyMartyr")), Enemy(g, player, pos, g->getTexture("EnemyMartyr"), "martyrDie","martyrHit", "martyrMeleeHit")
+MartyrEnemy::MartyrEnemy(Game* g, Player* player, Vector2D pos) : Enemy(g, player, pos, g->getTexture("EnemyMartyr"), "martyrDie","martyrHit", "martyrMeleeHit"), GroundEnemy(g, player, pos, g->getTexture("EnemyMartyr"))
 {
 	_vision = 300;
 	_life = 25;

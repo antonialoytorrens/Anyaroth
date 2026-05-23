@@ -39,11 +39,11 @@ void MissileTurret::update(double deltaTime)
 
 	if (usable && ready)
 	{
-		if (!_interactIndicator->isActive())
-			_interactIndicator->setActive(true);
+		if (!_interactIndicator->IsEnabled())
+			_interactIndicator->SetEnabled(true);
 	}
 	else
-		_interactIndicator->setActive(false);
+		_interactIndicator->SetEnabled(false);
 
 	if (usable)
 	{

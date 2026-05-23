@@ -24,7 +24,7 @@ void PiercingBulletEffect::beginCollision(Bullet* bullet, GameObject * other, b2
 
 void PiercingBulletEffect::update(Bullet* bullet, double time)
 {
-	if (bullet->isActive())
+	if (bullet->IsEnabled())
 	{
 		double dist = bullet->getIniPos().distance(bullet->getTransform()->getPosition());
 

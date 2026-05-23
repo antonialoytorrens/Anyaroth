@@ -24,6 +24,6 @@ void BulletPool::stopBullets()
 	for (auto b : _objects)
 	{
 		b->reset();
-		b->setActive(false);
+		b->SetEnabled(false);
 	}
 }

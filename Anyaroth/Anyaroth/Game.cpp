@@ -109,7 +109,6 @@ void Game::createDialogues()
 		{
 			string id = it.key();
 			json aux = it.value();
-			int numDialogues = j.size();
 			string face, voice, name;
 			vector<string> conversation;
 			vector<int> faces;
@@ -224,7 +223,6 @@ Game::~Game()
 
 void Game::run()
 {
-	Uint32 deltaTime = FRAME_RATE;
 	Uint32 startTime = SDL_GetTicks();
 	Uint32 lag = 0;
 

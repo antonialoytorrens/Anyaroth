@@ -3,7 +3,7 @@
 class Life
 {
 private:
-	int _life, _maxLife;
+	int _maxLife, _life;
 
 public:
 	Life() {}

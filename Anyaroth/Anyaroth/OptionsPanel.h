@@ -19,7 +19,7 @@ private:
 
 	ButtonUI* _backButton;
 
-	bool _menu, _fullScreen;
+	bool _menu;
 	int buttonW, buttonH;
 
 public:

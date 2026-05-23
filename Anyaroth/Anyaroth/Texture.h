@@ -1,6 +1,6 @@
 #pragma once
-#include "SDL.h"
-#include "SDL_image.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "SDLError.h"
 #include "TTFclass.h"
 
@@ -31,7 +31,7 @@ private:
 public:
 	Texture() :_renderer(nullptr) {}
 	Texture(SDL_Renderer* r) : _renderer(r) {}
-	Texture(SDL_Renderer* r, string filename, uint numRows = 1, uint numCols = 1) : _filename(filename), _renderer(r) { load(filename, numRows, numCols); }
+	Texture(SDL_Renderer* r, string filename, uint numRows = 1, uint numCols = 1) : _renderer(r), _filename(filename) { load(filename, numRows, numCols); }
 	Texture(SDL_Renderer* r, string text, const Font* font, SDL_Color color) : _renderer(r) { loadFromText(text, font, color); }
 	~Texture() { free(); }
 	void free();

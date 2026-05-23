@@ -2,7 +2,7 @@
 #include "BodyComponent.h"
 #include "Game.h"
 
-GravityBombDebuff::GravityBombDebuff(GameObject* obj, GameObject* gravityZone) : _obj(obj), _gravityZone(gravityZone), PhysicsComponent(obj)
+GravityBombDebuff::GravityBombDebuff(GameObject* obj, GameObject* gravityZone) : PhysicsComponent(obj), _gravityZone(gravityZone), _obj(obj)
 {
 	obj->addComponent(this);
 	_active = true;
@@ -39,7 +39,7 @@ void GravityBombDebuff::stop()
 
 void GravityBombDebuff::update(double deltaTime)
 {
-	if (_active && _obj->isActive())
+	if (_active && _obj->IsEnabled())
 	{
 		double dist = _obj->getComponent<TransformComponent>()->getPosition().distance(_gravityZone->getComponent<TransformComponent>()->getPosition());
 

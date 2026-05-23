@@ -22,7 +22,7 @@ void PiercingBullet::beginCollision(GameObject * other, b2Contact* contact)
 
 void PiercingBullet::update(const double& deltaTime)
 {
-	if (!isActive())
+	if (!IsEnabled())
 		return;
 
 	double dist = _iniPos.distance(_transform->getPosition());

@@ -37,7 +37,7 @@ void NPC::update(double time)
 	{
 		if (_dialoguePanel->isOpened())
 		{
-			_interactIndicator->setActive(false);
+			_interactIndicator->SetEnabled(false);
 			if (_other != nullptr)
 			{
 				_other->setInputFreezed(true);
@@ -56,7 +56,7 @@ void NPC::update(double time)
 		}
 		else
 		{
-			_interactIndicator->setActive(true);
+			_interactIndicator->SetEnabled(true);
 			if (_other != nullptr)
 				_other->setInputFreezed(false);
 		}

@@ -1,7 +1,7 @@
 #include "CustomAnimatedSpriteComponent.h"
 
 
-CustomAnimatedSpriteComponent::CustomAnimatedSpriteComponent(GameObject* obj) : AnimatedSpriteComponent(obj), RenderComponent(obj){}
+CustomAnimatedSpriteComponent::CustomAnimatedSpriteComponent(GameObject* obj) : RenderComponent(obj), AnimatedSpriteComponent(obj){}
 
 
 void CustomAnimatedSpriteComponent::render(Camera * c) const

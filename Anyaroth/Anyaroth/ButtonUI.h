@@ -34,7 +34,7 @@ class ButtonUI : public FramedImageUI
 		vector<ButtonUI*> _nextButtons = { nullptr, nullptr, nullptr, nullptr };
 
 	public:
-		ButtonUI(Game* game, Texture* image, const Callback& callback = NULL, Frames frames = { 0, 0, 0, 0 }, int arrayPos = 0);
+		ButtonUI(Game* game, Texture* image, const Callback& callback = nullptr, Frames frames = { 0, 0, 0, 0, 0 }, int arrayPos = 0);
 		virtual ~ButtonUI() {};
 
 		virtual void update(double deltaTime);
@@ -57,11 +57,11 @@ class ButtonUI : public FramedImageUI
 		inline bool isSelected() { return _selected; }
 
 		void setNextButtons(vector<ButtonUI*> nextButtons) { _nextButtons = nextButtons; }
-		inline  vector<ButtonUI*> const getNextButtons() { return _nextButtons; }
-		inline ButtonUI* const getNextLeft() { return _nextButtons[0]; }
-		inline ButtonUI* const getNextUp() { return _nextButtons[1]; }
-		inline ButtonUI* const getNextRight() { return _nextButtons[2]; }
-		inline ButtonUI* const getNextDown() { return _nextButtons[3]; }
+		inline  vector<ButtonUI*> getNextButtons() { return _nextButtons; }
+		inline ButtonUI* getNextLeft() { return _nextButtons[0]; }
+		inline ButtonUI* getNextUp() { return _nextButtons[1]; }
+		inline ButtonUI* getNextRight() { return _nextButtons[2]; }
+		inline ButtonUI* getNextDown() { return _nextButtons[3]; }
 
 		void setInputEnable(bool b);
 };

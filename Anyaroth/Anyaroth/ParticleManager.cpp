@@ -177,7 +177,7 @@ void ParticleManager::CreateFountain(Texture * ParticleText, const Vector2D & po
 	Vector2D dir = direccion;
 	dir.normalize();
 
-	double _angle = 0, inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
+	double inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
 	double particleSpawn;
 	ParticleData infoP;
 
@@ -206,7 +206,7 @@ void ParticleManager::CreateFountain(Texture * ParticleText, const Vector2D & po
 	Vector2D dir = direccion;
 	dir.normalize();
 
-	double _angle = 0, inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
+	double inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
 	double particleSpawn;
 	ParticleData infoP;
 
@@ -235,7 +235,7 @@ void ParticleManager::CreateFountain(Texture * ParticleText, const Vector2D & po
 	Vector2D dir = direccion;
 	dir.normalize();
 
-	double _angle = 0, inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
+	double inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
 	double particleSpawn;
 	ParticleData infoP;
 	double actualSpeed;
@@ -266,7 +266,7 @@ void ParticleManager::CreateFountain(Texture * ParticleText, const Vector2D & po
 	Vector2D dir = direccion;
 	dir.normalize();
 
-	double _angle = 0, inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
+	double inicialAngle = (atan2(dir.getY(), dir.getX()) * 180 / M_PI) - angle / 2;
 	double particleSpawn;
 	ParticleData infoP;
 	double actualSpeed;

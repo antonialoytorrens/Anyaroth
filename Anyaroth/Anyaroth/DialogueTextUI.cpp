@@ -17,13 +17,13 @@ void DialogueTextUI::update(double deltaTime)
 {
 	if (_visible)
 	{
-		if (_character < _textToType.length() && !_textTyped)
+		if (static_cast<size_t>(_character) < _textToType.length() && !_textTyped)
 		{
 			//Tiempos de espera para cada caracter
 			switch (_textToType[_character])
 			{
 			case '.':
-				_waitTime = 150; //Poner parámetro aquí para la velocidad de reproduccion
+				_waitTime = 150; //Poner parï¿½metro aquï¿½ para la velocidad de reproduccion
 				break;
 			default:
 				_waitTime = 20;
@@ -65,7 +65,7 @@ void DialogueTextUI::completeLine()
 {
 	_textTyped = true;
 
-	while (_character < _textToType.size())
+	while (static_cast<size_t>(_character) < _textToType.size())
 	{
 		_dialogueTexts.push_back(_textToType[_character]);
 		_character++;

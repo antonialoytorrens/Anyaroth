@@ -1,7 +1,7 @@
 #include "LaserHandler.h"
 #include "Game.h"
 
-LaserHandler::LaserHandler(Game* g, Texture* container, Texture* laser, Player* player, int numLasers, int span, Vector2D pos) : _numLasers(numLasers), GameObject(g)
+LaserHandler::LaserHandler(Game* g, Texture* container, Texture* laser, Player* player, int numLasers, int span, Vector2D pos) : GameObject(g), _numLasers(numLasers)
 {
 	int spaceBetween = (span - pos.getX()) / numLasers;
 

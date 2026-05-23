@@ -21,7 +21,7 @@ void GroundEnemy::moving(Vector2D& dir)
 	{
 		if (!(collidingL && dir.getX() < 0) && !(collidingR && dir.getX() > 0))
 		{
-			_body->getBody()->SetLinearVelocity({ _speed*(float32)dir.getX(), _body->getBody()->GetLinearVelocity().y });
+			_body->getBody()->SetLinearVelocity({ _speed*(float_t)dir.getX(), _body->getBody()->GetLinearVelocity().y });
 			_anim->playAnim(AnimatedSpriteComponent::EnemyWalk);
 		}
 		else
@@ -53,9 +53,7 @@ void GroundEnemy::addSensors()
 	fDef.friction = -26;
 	_body->addFixture(&fDef, this);
 
-	shape;
 	shape.SetAsBox(5 / M_TO_PIXEL, 2 / M_TO_PIXEL, b2Vec2(2, 2), 0);
-	fDef;
 	fDef.shape = &shape;
 	fDef.filter.categoryBits = ENEMIES;
 	fDef.filter.maskBits = FLOOR | PLATFORMS;
@@ -74,6 +72,7 @@ void GroundEnemy::beginCollision(GameObject * other, b2Contact* contact)
 
 	//Deteccion del suelo
 	if ((fA->IsSensor() || fB->IsSensor()) && (other->getTag() == "Ground" || other->getTag() == "Platform"))
+	{
 		if (fA->GetFriction() == 26 || fB->GetFriction() == 26)
 		{
 			collidingR = true;
@@ -82,6 +81,7 @@ void GroundEnemy::beginCollision(GameObject * other, b2Contact* contact)
 		{
 			collidingL = true;
 		}
+	}
 }
 
 void GroundEnemy::endCollision(GameObject * other, b2Contact* contact)
@@ -92,6 +92,7 @@ void GroundEnemy::endCollision(GameObject * other, b2Contact* contact)
 
 	//Deteccion del suelo
 	if ((fA->IsSensor() || fB->IsSensor()) && (other->getTag() == "Ground" || other->getTag() == "Platform"))
+	{
 		if (fA->GetFriction() == 26 || fB->GetFriction() == 26)
 		{
 			collidingR = false;
@@ -100,4 +101,5 @@ void GroundEnemy::endCollision(GameObject * other, b2Contact* contact)
 		{
 			collidingL = false;
 		}
+	}
 }

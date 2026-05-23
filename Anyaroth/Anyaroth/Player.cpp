@@ -106,7 +106,7 @@ void Player::beginCollision(GameObject * other, b2Contact* contact)
 	}
 	else if (other->getTag() == "Coin")
 	{
-		if (other->isActive())
+		if (other->IsEnabled())
 		{
 			auto value = other->getValue();
 
@@ -117,7 +117,7 @@ void Player::beginCollision(GameObject * other, b2Contact* contact)
 	}
 	else if (other->getTag() == "Ammo")
 	{
-		if (other->isActive())
+		if (other->IsEnabled())
 		{
 			auto value = other->getValue();
 
@@ -130,7 +130,7 @@ void Player::beginCollision(GameObject * other, b2Contact* contact)
 	}
 	else if (other->getTag() == "AidKit")
 	{
-		if (other->isActive())
+		if (other->IsEnabled())
 		{
 			auto value = other->getValue();
 
@@ -166,7 +166,7 @@ void Player::die()
 
 	setDead(true);
 	_deathCD = 3000;
-	_playerArm->setActive(false);
+	_playerArm->SetEnabled(false);
 	_anim->playAnim(AnimatedSpriteComponent::PlayerDie);
 	_body->getBody()->SetLinearVelocity(b2Vec2(0.0, 0.0));
 	_body->getBody()->SetAngularVelocity(0);
@@ -186,7 +186,7 @@ void Player::revive()
 
 	setDead(false);
 	_playerPanel->showDeathText(false);
-	_playerArm->setActive(true);
+	_playerArm->SetEnabled(true);
 
 	_life.resetLife();
 	_playerPanel->updateLifeBar(_life.getLife(), _life.getMaxLife());
@@ -489,7 +489,7 @@ void Player::checkMovement(const Uint8* keyboard)
 			_jPosY = (SDL_GameControllerGetAxis(_game->getJoystick(), SDL_CONTROLLER_AXIS_RIGHTY));
 
 			if (_jReleased)
-				_jReleased = (_prevAxisX < 0 && _prevAxisX < _jPosX || _prevAxisX > 0 && _prevAxisX > _jPosX) || (_prevAxisY < 0 && _prevAxisY < _jPosY || _prevAxisY > 0 && _prevAxisY > _jPosY);
+				_jReleased = ((_prevAxisX < 0 && _prevAxisX < _jPosX) || (_prevAxisX > 0 && _prevAxisX > _jPosX)) || ((_prevAxisY < 0 && _prevAxisY < _jPosY) || (_prevAxisY > 0 && _prevAxisY > _jPosY));
 
 			int winWidth = 0;	int winHeight = 0;
 			SDL_GetWindowSize(_game->getWindow(), &winWidth, &winHeight);
@@ -517,7 +517,7 @@ void Player::checkMovement(const Uint8* keyboard)
 		if (_isShooting && !isMeleeing() && !isDashing() && !_hasToReload && !isReloading())
 			shoot();
 		//Melee
-		if (_isMeleeing && !isMeleeing() && isGrounded() && !isDashing() && !_melee->isActive())
+		if (_isMeleeing && !isMeleeing() && isGrounded() && !isDashing() && !_melee->IsEnabled())
 			melee();
 	}
 }
@@ -558,10 +558,10 @@ void Player::handleAnimations()
 		}
 
 		if (isDashing() || isMeleeing())
-			_playerArm->setActive(false);
-		else if (!_playerArm->isActive() && !isDashing() && !isMeleeing())
+			_playerArm->SetEnabled(false);
+		else if (!_playerArm->IsEnabled() && !isDashing() && !isMeleeing())
 		{
-			_playerArm->setActive(true);
+			_playerArm->SetEnabled(true);
 			_anim->playAnim(AnimatedSpriteComponent::Idle);
 		}
 
@@ -810,7 +810,7 @@ void Player::stunPlayer()
 
 void Player::melee()
 {
-	if(_melee->isActive())
+	if(_melee->IsEnabled())
 		_melee->endMelee();
 
 	_anim->playAnim(_meleeAnim);
@@ -863,7 +863,7 @@ bool Player::canReload()
 
 void Player::checkMelee()
 {
-	if (!isMeleeing() && _melee != nullptr && _melee->isActive())
+	if (!isMeleeing() && _melee != nullptr && _melee->IsEnabled())
 		_melee->endMelee();
 }
 

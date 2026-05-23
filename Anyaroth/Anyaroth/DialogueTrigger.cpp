@@ -6,7 +6,7 @@ DialogueTrigger::DialogueTrigger(Game* game, string data, Player* player, int xP
 {
 	if (data == "Close")
 	{
-		onTriggerEnter([this, game]() {
+		onTriggerEnter([this]() {
 			getPlayHUD()->getDialoguePanel()->endDialogue();
 			getPlayHUD()->getDialoguePanel()->stopAtLastLineShown(false);
 			destroy();
@@ -14,7 +14,7 @@ DialogueTrigger::DialogueTrigger(Game* game, string data, Player* player, int xP
 	}
 	else
 	{
-		onTriggerEnter([this, game, data, player]() {
+		onTriggerEnter([this, data, player]() {
 			getPlayHUD()->getDialoguePanel()->endDialogue();
 			getPlayHUD()->getDialoguePanel()->stopAtLastLineShown(true);
 			getPlayHUD()->getDialoguePanel()->startDialogue(_game->getDialogue(_game->usingJoystick() ? data + "PAD" : data));

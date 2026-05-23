@@ -45,7 +45,7 @@ private:
 public:
 	Camera(Game* game) : _game(game) {};
 	Camera(Game* game, GameObject* followObject);
-	Camera(Game* game, SDL_Rect rect) : _cameraRect(rect), _game(game) {}
+	Camera(Game* game, SDL_Rect rect) : _game(game), _cameraRect(rect) {}
 	~Camera();
 
 	inline SDL_Rect* getCameraRect() { return &_cameraRect; }

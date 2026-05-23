@@ -18,9 +18,9 @@ Particle::Particle(Game* game) : GameObject(game)
 	_body->getBody()->SetType(b2_dynamicBody);
 	_body->getBody()->SetFixedRotation(true);
 	_body->getBody()->SetGravityScale(0);
-	_body->getBody()->SetActive(false);
+	_body->getBody()->SetEnabled(false);
 
-	setActive(false);
+	SetEnabled(false);
 }
 
 
@@ -46,8 +46,8 @@ void Particle::init(Texture * texture, const Vector2D & position, double speed, 
 	_body->moveShape(b2Vec2(0, 0));
 	_body->filterCollisions(PLAYER_BULLETS, FLOOR);
 	
-	_body->getBody()->SetActive(true);
-	_body->getBody()->SetTransform({ (float32)(position.getX() / M_TO_PIXEL), (float32)(position.getY() / M_TO_PIXEL) }, _body->getBody()->GetAngle());
+	_body->getBody()->SetEnabled(true);
+	_body->getBody()->SetTransform({ (float_t)(position.getX() / M_TO_PIXEL), (float_t)(position.getY() / M_TO_PIXEL) }, _body->getBody()->GetAngle());
 	_body->getBody()->SetLinearVelocity(b2Vec2(_speed*cos(angle* M_PI / 180.0), -_speed*sin(angle* M_PI / 180.0)));
 
 
@@ -55,13 +55,13 @@ void Particle::init(Texture * texture, const Vector2D & position, double speed, 
 
 	_anim->setTexture(texture);
 
-	setActive(true);
+	SetEnabled(true);
 }
 
 void Particle::update(double deltaTime)
 {
 	GameObject::update(deltaTime);
-	if (isActive()) {
+	if (IsEnabled()) {
 		if (_maxAliveTime > 0)
 		{
 			_maxAliveTime -= deltaTime;
@@ -77,7 +77,7 @@ void Particle::update(double deltaTime)
 void Particle::reset()
 {
 	_body->getBody()->SetGravityScale(0);
-	_body->getBody()->SetActive(false);
-	setActive(false);
+	_body->getBody()->SetEnabled(false);
+	SetEnabled(false);
 	_maxAliveTime = 0;
 }

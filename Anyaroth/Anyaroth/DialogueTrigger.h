@@ -5,8 +5,6 @@
 class DialogueTrigger :
 	public Trigger
 {
-private:
-	Player* _player = nullptr;
 public:
 	DialogueTrigger(Game* game, string data, Player* player, int xPos = 0, int yPos = 0);
 	virtual ~DialogueTrigger();

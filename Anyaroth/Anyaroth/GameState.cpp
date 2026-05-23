@@ -1,6 +1,7 @@
 #include "GameState.h"
 #include "Game.h"
 #include "CutScene.h"
+#include <algorithm>
 
 GameState::GameState(Game* g) : _gameptr(g)
 {
@@ -43,7 +44,7 @@ void GameState::render() const
 	_mainCamera->render();
 
 	for (GameObject* o : _stages)
-		if (o->isActive())
+		if (o->IsEnabled())
 			o->render(_mainCamera);
 
 	if (_canvas != nullptr)
@@ -57,7 +58,7 @@ void GameState::update(double deltaTime)
 	_mainCamera->update(deltaTime);
 
 	for (GameObject* o : _stages)
-		if (o->isActive())
+		if (o->IsEnabled())
 			o->update(deltaTime);
 
 	if (_canvas != nullptr)

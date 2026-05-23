@@ -1,9 +1,9 @@
 #include "TutorialTurret.h"
 
-TutorialTurret::TutorialTurret(Game* g, Player* player, Vector2D pos, BulletPool* pool) : DistanceStaticEnemy(g, player, pos, pool), Enemy(g, player, pos, g->getTexture("Turret"), "turretDeath", "turretHit", "turretMeleeHit")
+TutorialTurret::TutorialTurret(Game* g, Player* player, Vector2D pos, BulletPool* pool) : Enemy(g, player, pos, g->getTexture("Turret"), "turretDeath", "turretHit", "turretMeleeHit"), DistanceStaticEnemy(g, player, pos, pool)
 {
 	_vision = 1010;
-	_attackRangeX = _attackRangeY = _vision; //No se puede poner mas pequeño que la velocidad
+	_attackRangeX = _attackRangeY = _vision; //No se puede poner mas pequeï¿½o que la velocidad
 	_attackTime = 2000; //La animacion tarda unos 450
 
 	if (_attackRangeX < _speed)
@@ -20,7 +20,7 @@ TutorialTurret::TutorialTurret(Game* g, Player* player, Vector2D pos, BulletPool
 	_hurtParticle = g->getTexture("Sparks");
 }
 
-void TutorialTurret::beginCollision(GameObject * other, b2Contact* contact)
+void TutorialTurret::beginCollision(GameObject * other, b2Contact* /*contact*/)
 {
 	if (other->getTag() == "Bullet" || other->getTag() == "Melee")
 	{

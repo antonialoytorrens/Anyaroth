@@ -24,7 +24,7 @@ protected:
 	bool _attacking = false, _drop = true, _dropMelee = false, _stunned = false, _spawnParticles = false;
 	int _vision, _attackRangeX, _attackRangeY, _attackTime, _damage;
 	double _time;
-	float32 _speed;
+	float_t _speed;
 	
 	b2Vec2 _contactPoint = b2Vec2_zero;
 
