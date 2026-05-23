@@ -1,6 +1,7 @@
 #include "DistanceEnemy.h"
 #include "Game.h"
 #include "BasicPistol.h"
+#include "Box2DCompat.h"
 
 DistanceEnemy::DistanceEnemy(Game* g, Player* player, Vector2D pos, Texture* texture, BulletPool* pool, Vector2D offset) : Enemy(g, player, pos, texture)
 {
@@ -29,8 +30,8 @@ void DistanceEnemy::raycast()
 	b2RayCastInput rayInput;
 
 	rayInput.maxFraction = 1;
-	rayInput.p1 = { (float32)(enemyPos.x), (float32)(enemyPos.y - _body->getH()) };
-	rayInput.p2 = { (float32)(targetPos.x), (float32)(targetPos.y) };
+	rayInput.p1 = { (float_t)(enemyPos.x), (float_t)(enemyPos.y - _body->getH()) };
+	rayInput.p2 = { (float_t)(targetPos.x), (float_t)(targetPos.y) };
 
 	b2RayCastOutput rayOutput;
 
@@ -38,8 +39,8 @@ void DistanceEnemy::raycast()
 
 	for (b2Body* b = getWorld()->GetBodyList(); b && _armVision; b = b->GetNext())
 		for (b2Fixture* f = b->GetFixtureList(); f && _armVision; f = f->GetNext())
-			if ((((GameObject*)(b->GetUserData()))->getTag() == "Ground" || ((GameObject*)(b->GetUserData()))->getTag() == "Platform" ||
-				((GameObject*)(b->GetUserData()))->getTag() == "Door") && f->RayCast(&rayOutput, rayInput, 0))
+			if ((((GameObject*)(B2GetUserData(b)))->getTag() == "Ground" || ((GameObject*)(B2GetUserData(b)))->getTag() == "Platform" ||
+				((GameObject*)(B2GetUserData(b)))->getTag() == "Door") && f->RayCast(&rayOutput, rayInput, 0))
 				_armVision = false;
 }
 

@@ -1,6 +1,7 @@
 #include "BodyComponent.h"
 #include "GameObject.h"
 #include "Game.h"
+#include "Box2DCompat.h"
 
 BodyComponent::BodyComponent(GameObject * obj) : PhysicsComponent(obj)
 {
@@ -39,8 +40,8 @@ BodyComponent::BodyComponent(GameObject * obj) : PhysicsComponent(obj)
 	_fixture.restitution = 0;
 	_fixture.friction = 0.001;
 
-	_body->CreateFixture(&_fixture)->SetUserData(obj);
-	_body->SetUserData(obj);
+	B2SetUserData(_body->CreateFixture(&_fixture), obj);
+	B2SetUserData(_body, obj);
 }
 
 BodyComponent::BodyComponent(GameObject * obj, double x, double y, double w, double h) : PhysicsComponent(obj)
@@ -60,7 +61,7 @@ BodyComponent::BodyComponent(GameObject * obj, double x, double y, double w, dou
 	_fixture.friction = 0.001;
 
 	_body->CreateFixture(&_fixture);
-	_body->SetUserData(obj);
+	B2SetUserData(_body, obj);
 	_body->SetFixedRotation(true);
 }
 
@@ -70,7 +71,7 @@ BodyComponent::~BodyComponent()
 		_world->DestroyBody(_body);
 }
 
-void BodyComponent::update(double deltaTime)
+void BodyComponent::update(double /*deltaTime*/)
 {
 	if (_body!=nullptr && (_body->GetType() != b2_staticBody && _transform != nullptr))
 		_transform->setPosition(((double)_body->GetPosition().x*M_TO_PIXEL) - _textW * (0.5 - _aX), ((double)_body->GetPosition().y*M_TO_PIXEL) - _textH * (0.5 - _aY));
@@ -111,7 +112,7 @@ void BodyComponent::setBody(GameObject * obj, double x, double y, double w, doub
 	_fixture.friction = 0.001;
 
 	_body->CreateFixture(&_fixture);
-	_body->SetUserData(obj);
+	B2SetUserData(_body, obj);
 	_body->SetFixedRotation(true);
 }
 
@@ -169,5 +170,5 @@ void BodyComponent::filterCollisions(uint16 ownCategory, uint16 collidesWith, in
 
 void BodyComponent::addFixture(b2FixtureDef* fixture, void* data)
 {
-	_body->CreateFixture(fixture)->SetUserData(data);
+	B2SetUserData(_body->CreateFixture(fixture), data);
 }

@@ -1,10 +1,11 @@
 #include "CollisionManager.h"
 #include "GameObject.h"
+#include "Box2DCompat.h"
 
 void CollisionManager::BeginContact(b2Contact * contact)
 {
-	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+	void* bodyUserDataA = B2GetUserData(contact->GetFixtureA()->GetBody());
+	void* bodyUserDataB = B2GetUserData(contact->GetFixtureB()->GetBody());
 
 	if (bodyUserDataA && bodyUserDataB)
 	{
@@ -17,8 +18,8 @@ void CollisionManager::BeginContact(b2Contact * contact)
 
 void CollisionManager::EndContact(b2Contact * contact)
 {
-	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+	void* bodyUserDataA = B2GetUserData(contact->GetFixtureA()->GetBody());
+	void* bodyUserDataB = B2GetUserData(contact->GetFixtureB()->GetBody());
 
 	if (bodyUserDataA && bodyUserDataB)
 	{
@@ -31,8 +32,8 @@ void CollisionManager::EndContact(b2Contact * contact)
 
 inline void CollisionManager::PreSolve(b2Contact * contact)
 {
-	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+	void* bodyUserDataA = B2GetUserData(contact->GetFixtureA()->GetBody());
+	void* bodyUserDataB = B2GetUserData(contact->GetFixtureB()->GetBody());
 
 	if (bodyUserDataA && bodyUserDataB)
 	{
@@ -45,8 +46,8 @@ inline void CollisionManager::PreSolve(b2Contact * contact)
 
 inline void CollisionManager::PostSolve(b2Contact * contact)
 {
-	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+	void* bodyUserDataA = B2GetUserData(contact->GetFixtureA()->GetBody());
+	void* bodyUserDataB = B2GetUserData(contact->GetFixtureB()->GetBody());
 
 	if (bodyUserDataA && bodyUserDataB)
 	{

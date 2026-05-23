@@ -1,6 +1,7 @@
 #include "Tilemap.h"
 #include "Game.h"
 #include "Camera.h"
+#include "Box2DCompat.h"
 #include <json.hpp>
 
 using namespace nlohmann;
@@ -45,16 +46,16 @@ void Tilemap::render(Camera * c) const
 				//Fila y columna de la textura
 				auto aux = (*beginOfFil).second;
 				std::vector<Tile> casilla = aux.getTiles();
-				for (int i = 0; i < casilla.size(); i++)
+				for (size_t i = 0; i < casilla.size(); i++)
 				{
 					Tile t = casilla[i];;
 					int row = (t.tilesetIndex - 1) / _tileSet->getNumCols();
 					int col = (t.tilesetIndex - 1) % _tileSet->getNumCols();
 
-					SDL_Rect destRect = { t.xIndex * _tileSize - c->getCameraPosition().getX(), t.yIndex * _tileSize - c->getCameraPosition().getY(), _tileSize, _tileSize };
+					SDL_Rect destRect = { int(t.xIndex * _tileSize - c->getCameraPosition().getX()), int(t.yIndex * _tileSize - c->getCameraPosition().getY()), _tileSize, _tileSize };
 
-					SDL_Rect winRect = { destRect.x * GAME_RESOLUTION_X / c->getCameraSize().getX(), destRect.y * GAME_RESOLUTION_Y / c->getCameraSize().getY(),
-						destRect.w * GAME_RESOLUTION_X / c->getCameraSize().getX() + 1, destRect.h * GAME_RESOLUTION_Y / c->getCameraSize().getY() + 1 }; //+1 para el tema del Zoom
+					SDL_Rect winRect = { int(destRect.x * GAME_RESOLUTION_X / c->getCameraSize().getX()), int(destRect.y * GAME_RESOLUTION_Y / c->getCameraSize().getY()),
+						int(destRect.w * GAME_RESOLUTION_X / c->getCameraSize().getX() + 1), int(destRect.h * GAME_RESOLUTION_Y / c->getCameraSize().getY() + 1) }; //+1 para el tema del Zoom
 
 					_tileSet->renderFrame(winRect, row, col);
 				}		
@@ -78,10 +79,10 @@ void Tilemap::loadTileMap(const string & filename)
 		file >> data;
 		data = data["layers"];
 		
-		int index, height = 0, width = 0;
+		int height = 0, width = 0;
 		string type, name;
 
-		for (int i = 0; i < data.size(); i++)
+		for (size_t i = 0; i < data.size(); i++)
 		{
 			json layer = data[i];
 
@@ -107,7 +108,6 @@ void Tilemap::loadTileMap(const string & filename)
 				if (it != layer.end())
 					layer = *it;
 
-				int indexCount = 1;
 				_maxFils = height;
 				_maxCols = width;
 
@@ -142,7 +142,7 @@ void Tilemap::loadTileMap(const string & filename)
 								fixture.isSensor = true;
 
 							body->CreateFixture(&fixture);
-							body->SetUserData(&_grid[i + 1]);
+							B2SetUserData(body, &_grid[i + 1]);
 							body->SetFixedRotation(true);
 
 							_colliders.push_back(body);
